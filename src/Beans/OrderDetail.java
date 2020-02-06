@@ -1,11 +1,16 @@
 package Beans;
 
 public class OrderDetail {
+    private int ID;
     private Order order;
     private Product product;
     private int quantity;
 
     public OrderDetail() {
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public Order getOrder() {
