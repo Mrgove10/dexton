@@ -1,6 +1,6 @@
 package Beans;
 
-public class Products {
+public class Product {
 
     private int id;
     private String name;
