@@ -1,9 +1,14 @@
 package Beans;
 
 public class User {
+    private int ID;
     private String lastName;
     private String firstName;
     private String email;
+
+    public Integer getID() {
+        return ID;
+    }
 
     public String getLastName() {
         return lastName;
