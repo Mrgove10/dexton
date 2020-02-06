@@ -1,6 +1,6 @@
 package Beans;
 
-public class Users {
+public class User {
     private String lastName;
     private String firstName;
     private String email;
