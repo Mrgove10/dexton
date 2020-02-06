@@ -18,7 +18,7 @@ public class BrandDAO extends DAO<Brand> {
     }
 
     @Override
-    public boolean create(Brand obj) {
+    public boolean create(Brand obj) throws IOException {
         try {
             PreparedStatement ps = this.connect.prepareStatement("INSERT INTO Brands(NAME) VALUES (?);");
             ps.setString(1, obj.getName());
@@ -60,8 +60,8 @@ public class BrandDAO extends DAO<Brand> {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                brand.setId();rs.getInt("ID");
-                brand.setName(rs.getString("NAME");
+                brand.setId(rs.getInt("ID"));
+                brand.setName(rs.getString("NAME"));
             }
         } catch (SQLException e) {
             Logging.AddLog(Logging.Severity.Error, e.toString());
