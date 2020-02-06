@@ -22,14 +22,14 @@ public abstract class DAO<T> {
      * @param obj
      * @return boolean
      */
-    public abstract boolean delete(T obj);
+    public abstract boolean delete(T obj) throws IOException;
 
     /**
      * Méthode de mise à jour
      * @param obj
      * @return boolean
      */
-    public abstract boolean update(T obj);
+    public abstract boolean update(T obj) throws IOException;
 
     /**
      * Méthode de recherche des informations
