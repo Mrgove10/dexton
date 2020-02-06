@@ -140,4 +140,44 @@ public class UserDAO extends DAO<User> {
 
         return user;
     }
+
+    public User find(String email, String password) throws IOException {
+        User user = new User();
+        int idRole = -1;
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Users WHERE EMAIL = ? AND PASSWORD = ?");
+            ps.setString(1, email);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                //Retrieve by column name
+                user.setId(rs.getInt("ID"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setFirstName(rs.getString("FIRSTNAME"));
+                user.setFirstName(rs.getString("LASTNAME"));
+                idRole = rs.getInt("ROLE");
+            }
+            rs.close();
+
+            RoleDAO roleDAO = new RoleDAO(this.connect);
+            Role role = roleDAO.find(idRole);
+            user.setRole(role);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Logging.AddLog(Logging.Severity.Error, e.toString());
+        } finally {
+            try {
+                if (this.connect != null)
+                    this.connect.close();
+            } catch (SQLException ignore) {
+                Logging.AddLog(Logging.Severity.Error, ignore.toString());
+            }
+        }
+
+        return user;
+    }
 }
