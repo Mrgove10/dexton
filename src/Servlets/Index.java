@@ -1,5 +1,8 @@
 package Servlets;
 
+import DAO.DAOConnection;
+import DAO.UsersDAO;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,6 +17,7 @@ public class Index extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        UsersDAO usersDAO = new UsersDAO(DAOConnection.ConnectDb());
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 }
