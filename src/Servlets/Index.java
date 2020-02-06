@@ -18,12 +18,12 @@ public class Index extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = new User();
+        /*User user = new User();
         user.setLastName("CLISSON");
         user.setFirstName("Edouard");
         user.setEmail("edouardclisson@gmail.com");
         UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
-        userDAO.create(user);
+        userDAO.create(user);*/
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
 }
