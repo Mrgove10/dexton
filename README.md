@@ -1,6 +1,6 @@
 # Dexton, Java Web store
 
 
-##Database
+## Database
 
 ![Database Diagram](docs/Dexton.png "Database Diagram")

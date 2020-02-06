@@ -1,9 +1,5 @@
 package Servlets;
 
-import Beans.User;
-import DAO.DAOConnection;
-import DAO.UserDAO;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

@@ -1,6 +1,7 @@
-package DAO;
+package DAO.Classes;
 
 import Beans.User;
+import DAO.DAO;
 
 import java.sql.*;
 
