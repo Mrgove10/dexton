@@ -19,7 +19,7 @@ public class Index extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        User user = new User();
+        /*User user = new User();
         user.setLastName("CLISSON");
         user.setFirstName("Edouard");
         user.setEmail("edouardclisson@gmail.com");
@@ -28,9 +28,9 @@ public class Index extends HttpServlet {
         role.setName("Admin");
 
         user.setRole(role);
-
+        */
         UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
-        userDAO.create(user);
+        User user = userDAO.find("edouardclisson@gmail.common", "123456");
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }

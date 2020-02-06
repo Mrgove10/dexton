@@ -6,7 +6,6 @@ public class Product {
     private String name;
     private float price;
     private String description;
-    private Brand Brand;
     private Category Category;
     private float rating;
 
@@ -40,14 +39,6 @@ public class Product {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Brand getBrand() {
-        return Brand;
-    }
-
-    public void setBrand(Brand brand) {
-        Brand = brand;
     }
 
     public Beans.Category getCategory() {

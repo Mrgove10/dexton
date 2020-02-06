@@ -14,7 +14,7 @@ public class Logging {
     }
 
     public static void AddLog(Severity severity, String message) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter("logs/Logs.log", true));
+        /*BufferedWriter writer = new BufferedWriter(new FileWriter("logs/Logs.log", true));
         String str = "";
         switch (severity){
             case Debug:
@@ -32,6 +32,6 @@ public class Logging {
         str += dtf.format(now) +" | "; //adds th time
         str += message +"\n";
         writer.append(str);
-        writer.close();
+        writer.close();*/
     }
 }
