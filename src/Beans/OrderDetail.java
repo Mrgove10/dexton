@@ -6,9 +6,6 @@ public class OrderDetail {
     private Product product;
     private int quantity;
 
-    public OrderDetail() {
-    }
-
     public int getID() {
         return ID;
     }
