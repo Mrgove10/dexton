@@ -7,6 +7,10 @@ public class User {
     private String email;
     private Role role;
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public Role getRole() {
         return role;
     }

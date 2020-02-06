@@ -12,10 +12,11 @@ public class UserDAO extends DAO<User> {
 
     public boolean create(User obj) {
         try {
-            PreparedStatement preparedStatement = this.connect.prepareStatement("INSERT INTO Users(LASTNAME, FIRSTNAME, EMAIL) VALUES (?,?,?);");
+            PreparedStatement preparedStatement = this.connect.prepareStatement("INSERT INTO Users(LASTNAME, FIRSTNAME, EMAIL, ROLE) VALUES (?,?,?,?);");
             preparedStatement.setString(1, obj.getLastName());
             preparedStatement.setString(2, obj.getFirstName());
             preparedStatement.setString(3, obj.getEmail());
+            preparedStatement.setInt(4, obj.getRoleId());
 
             preparedStatement.executeUpdate();
 
@@ -43,7 +44,27 @@ public class UserDAO extends DAO<User> {
     }
 
     public User find(int id) {
-        User User = new User();
+        User user = new User();
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Users WHERE ID = ?");
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                //Retrieve by column name
+                user.setID(rs.getInt("ID"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setFirstName(rs.getString("FIRSTNAME"));
+                user.setFirstName(rs.getString("LASTNAME"));
+                int idRole = rs.getInt("ROLE");
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+
+        }
 
         return User;
     }

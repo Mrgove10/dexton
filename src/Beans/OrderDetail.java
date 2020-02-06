@@ -6,6 +6,10 @@ public class OrderDetail {
     private Product product;
     private int quantity;
 
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
     public int getID() {
         return ID;
     }
