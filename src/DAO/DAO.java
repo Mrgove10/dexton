@@ -1,5 +1,6 @@
 package DAO;
 
+import java.io.IOException;
 import java.sql.*;
 
 public abstract class DAO<T> {
@@ -35,5 +36,5 @@ public abstract class DAO<T> {
      * @param id
      * @return T
      */
-    public abstract T find(int id);
+    public abstract T find(int id) throws IOException;
 }

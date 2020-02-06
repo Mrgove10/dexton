@@ -3,17 +3,16 @@ package DAO.Classes;
 import Beans.Role;
 import Beans.User;
 import DAO.DAO;
-import Utils.Logging;
 
-import java.io.IOException;
 import java.sql.*;
 
-public class UserDAO extends DAO<User> {
-    public UserDAO(Connection conn) {
+public class RoleDAO extends DAO<Role> {
+    public RoleDAO(Connection conn) {
         super(conn);
     }
 
-    public boolean create(User obj) {
+    public boolean create(Role obj) {
+        /*
         try {
             PreparedStatement preparedStatement = this.connect.prepareStatement("INSERT INTO Users(LASTNAME, FIRSTNAME, EMAIL, ROLE) VALUES (?,?,?,?);");
             preparedStatement.setString(1, obj.getLastName());
@@ -31,48 +30,40 @@ public class UserDAO extends DAO<User> {
             try {
                 if (this.connect != null)
                     this.connect.close();
-                    return true;
+                return true;
             } catch (SQLException ignore) {
                 return false;
             }
-        }
-    }
-
-    public boolean delete(User obj) {
+        }*/
         return false;
     }
 
-    public boolean update(User obj) {
+    public boolean delete(Role obj) {
         return false;
     }
 
-    public User find(int id) throws IOException {
-        User user = new User();
-        int idRole = -1;
+    public boolean update(Role obj) {
+        return false;
+    }
+
+    public Role find(int id) {
+        Role role = new Role();
 
         try {
-            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Users WHERE ID = ?");
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Roles WHERE ID = ?");
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()){
                 //Retrieve by column name
-                user.setID(rs.getInt("ID"));
-                user.setEmail(rs.getString("EMAIL"));
-                user.setFirstName(rs.getString("FIRSTNAME"));
-                user.setFirstName(rs.getString("LASTNAME"));
-                idRole = rs.getInt("ROLE");
+                role.setId(rs.getInt("ID"));
+                role.setName(rs.getString("NAME"));
             }
             rs.close();
 
-            RoleDAO roleDAO = new RoleDAO(this.connect);
-            Role role = roleDAO.find(idRole);
-            user.setRole(role);
-
         } catch (SQLException e) {
             e.printStackTrace();
-            Logging.AddLog(Logging.Severity.Error, e.toString());
         } finally {
             // Fermeture de la connexion
             try {
@@ -82,6 +73,7 @@ public class UserDAO extends DAO<User> {
             }
         }
 
-        return user;
+        return role;
     }
 }
+

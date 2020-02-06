@@ -7,11 +7,12 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Logging {
-    public enum Severity{
+    public enum Severity {
         Debug,
         Warning,
         Error
     }
+
     public static void AddLog(Severity severity, String message) throws IOException {
         BufferedWriter writer = new BufferedWriter(new FileWriter("logs/Logs.log", true));
         String str = "";
