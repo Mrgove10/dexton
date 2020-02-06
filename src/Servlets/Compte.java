@@ -14,6 +14,6 @@ public class Compte extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        this.getServletContext().getRequestDispatcher("/WEB-INF/Compte.jsp").forward(request, response);
     }
 }
