@@ -15,6 +15,10 @@ public class User {
         this.role = role;
     }
 
+    public int getRoleId() {
+        return role.getId();
+    }
+    
     public Integer getID() {
         return ID;
     }
