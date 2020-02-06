@@ -45,7 +45,7 @@ public class UserDAO extends DAO<User> {
     public boolean delete(User obj) throws IOException {
         try {
             PreparedStatement ps = this.connect.prepareStatement("DELETE FROM Users WHERE ID = ?");
-            ps.setInt(1, obj.getID());
+            ps.setInt(1, obj.getId());
 
             ps.executeUpdate();
 
@@ -79,7 +79,7 @@ public class UserDAO extends DAO<User> {
             ps.setString(3, obj.getLastName());
             ps.setString(4, obj.getPassword());
             ps.setInt(5, obj.getRoleId());
-            ps.setInt(6, obj.getID());
+            ps.setInt(6, obj.getId());
 
             ps.executeUpdate();
 
@@ -114,7 +114,7 @@ public class UserDAO extends DAO<User> {
 
             while(rs.next()){
                 //Retrieve by column name
-                user.setID(rs.getInt("ID"));
+                user.setId(rs.getInt("ID"));
                 user.setEmail(rs.getString("EMAIL"));
                 user.setFirstName(rs.getString("FIRSTNAME"));
                 user.setFirstName(rs.getString("LASTNAME"));

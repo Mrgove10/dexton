@@ -1,15 +1,15 @@
 package Beans;
 
 public class User {
-    private int ID;
+    private int id;
     private String lastName;
     private String firstName;
     private String email;
     private String password;
     private Role role;
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Role getRole() {
@@ -24,8 +24,8 @@ public class User {
         return role.getId();
     }
 
-    public Integer getID() {
-        return ID;
+    public Integer getId() {
+        return id;
     }
 
     public String getLastName() {
