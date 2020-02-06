@@ -10,7 +10,8 @@ import java.io.IOException;
 @WebServlet(name = "Inscription")
 public class Inscription extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        System.out.println("ok");
+        response.sendRedirect( request.getContextPath() + "/Login");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
