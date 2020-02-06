@@ -11,7 +11,7 @@ public class UserDAO extends DAO<User> {
 
     public boolean create(User obj) {
         try {
-            PreparedStatement preparedStatement = this.connect.prepareStatement("INSERT INTO USERS(last_name, first_name, email) VALUES (?,?,?);");
+            PreparedStatement preparedStatement = this.connect.prepareStatement("INSERT INTO Users(LASTNAME, FIRSTNAME, EMAIL) VALUES (?,?,?);");
             preparedStatement.setString(1, obj.getLastName());
             preparedStatement.setString(2, obj.getFirstName());
             preparedStatement.setString(3, obj.getEmail());
