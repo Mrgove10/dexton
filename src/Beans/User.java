@@ -5,6 +5,24 @@ public class User {
     private String lastName;
     private String firstName;
     private String email;
+    private String password;
+    private Role role;
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public int getRoleId() {
+        return role.getId();
+    }
 
     public Integer getID() {
         return ID;
@@ -32,5 +50,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

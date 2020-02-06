@@ -4,7 +4,8 @@ public class Brand {
     private int id;
     private String name;
 
-    public Brand() {
+    public void setId(int id) {
+        this.id = id;
     }
 
     public int getId() {

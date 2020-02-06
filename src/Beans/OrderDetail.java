@@ -6,7 +6,8 @@ public class OrderDetail {
     private Product product;
     private int quantity;
 
-    public OrderDetail() {
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public int getID() {
