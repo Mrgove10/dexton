@@ -18,7 +18,7 @@ public class User {
     public int getRoleId() {
         return role.getId();
     }
-    
+
     public Integer getID() {
         return ID;
     }
