@@ -5,10 +5,7 @@ import DAO.DAOConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet(name = "Connexion")
@@ -29,6 +26,10 @@ public class Connexion extends HttpServlet {
             session.setAttribute("prenom", userFind.getFirstName());
             session.setAttribute("nom", userFind.getLastName());
 
+            Cookie cookie = new Cookie("email", userFind.getEmail());
+            cookie.setMaxAge(60 * 60 * 24 * 7);
+            response.addCookie(cookie);
+
             response.sendRedirect(request.getContextPath()+"/Home");
         }else {
             System.out.println("NOOOOOOO");
@@ -41,6 +42,15 @@ public class Connexion extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("error", false);
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null){
+            for (Cookie cookie : cookies){
+                if (cookie.getName().equals("email")){
+                    request.setAttribute("email", cookie.getValue());
+                }
+            }
+        }
+
         this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp").forward(request, response);
     }
 }
