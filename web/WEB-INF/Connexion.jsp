@@ -14,12 +14,18 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Password">
         </div>
         <c:if test="${ error }">
-            <div style="text-align: center">
-                <small style="color: red;text-align: center">Try to reconnect, your email or password is wrong</small>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <small style="color: red;text-align: center">Try to reconnect, email or password is wrong</small>
             </div>
         </c:if>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="Signin"><i class="fa fa-user-o"></i> You don't have any account ? Create it !</a>
+        <div class="row">
+            <div class="col-md-6">
+                <button style="width: 100%" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col-md-6" style="text-align: center">
+                <a href="Signin"><i class="fa fa-user-o"></i> You don't have any account ? Create it !</a>
+            </div>
+        </div>
     </form>
 </div>
 
