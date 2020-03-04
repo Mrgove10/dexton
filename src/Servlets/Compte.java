@@ -18,23 +18,32 @@ public class Compte extends HttpServlet {
         var email = request.getParameter("email");
         var firstName = request.getParameter("firstName");
         var lastName = request.getParameter("lastName");
-
+        User user = new User();
         try {
             UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
             HttpSession session = request.getSession();
 
-            User user = userDAO.find((Integer) session.getAttribute("id"));
+            user = userDAO.find((Integer) session.getAttribute("id"));
             user.setEmail(email);
             user.setFirstName(firstName);
             user.setLastName(lastName);
 
+            userDAO = new UserDAO(DAOConnection.ConnectDb());
             var isUpdate = userDAO.update(user);
+
+            session.setAttribute("prenom", user.getFirstName());
+            session.setAttribute("nom", user.getLastName());
+
             System.out.println("Is Update ? "+isUpdate);
         }catch (Exception e){
             System.out.println("Error : "+e.getMessage());
+            request.setAttribute("message", "<p style='color:red;'>An error has occured when try to update your account</p>");
         }
 
-        response.sendRedirect(request.getContextPath()+"/Account");
+        request.setAttribute("user", user);
+        request.setAttribute("message", "<p style='color:green;'>Update successfully</p>");
+
+        this.getServletContext().getRequestDispatcher("/WEB-INF/Compte.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -46,6 +55,7 @@ public class Compte extends HttpServlet {
             UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
             var user = userDAO.find((Integer) session.getAttribute("id"));
             request.setAttribute("user", user);
+            request.setAttribute("message", "");
             this.getServletContext().getRequestDispatcher("/WEB-INF/Compte.jsp").forward(request, response);
         }
     }
