@@ -44,5 +44,13 @@
         <servlet-name>Inscription</servlet-name>
         <url-pattern>/Signin</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Deconnexion</servlet-name>
+        <servlet-class>Servlets.Deconnexion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Deconnexion</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
 </web-app>
 

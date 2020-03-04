@@ -52,7 +52,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" style="width: 100%" href="Account">Account Info</a> <br>
-                        <a class="dropdown-item" style="width: 100%" href="Disconnect">Disconnect</a>
+                        <a class="dropdown-item" style="width: 100%" href="Logout">Disconnect</a>
                     </div>
                 </div>
             </c:if>
