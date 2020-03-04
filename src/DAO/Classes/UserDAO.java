@@ -44,7 +44,6 @@ public class UserDAO extends DAO<User> {
                 return false;
             }
         }
-
         return false;
     }
 
