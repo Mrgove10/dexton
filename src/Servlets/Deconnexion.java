@@ -16,6 +16,6 @@ public class Deconnexion extends HttpServlet {
         session.setAttribute("id", null);
         session.setAttribute("prenom", null);
         session.setAttribute("nom", null);
-        this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+        response.sendRedirect(request.getContextPath()+"/Home");
     }
 }
