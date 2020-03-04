@@ -3,7 +3,7 @@ package Beans;
 public class Order {
     private int id;
     private String status;
-    private User User;
+    private int userID;
 
     public int getId() {
         return id;
@@ -21,11 +21,11 @@ public class Order {
         this.status = status;
     }
 
-    public User getUser() {
-        return User;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUser(User user) {
-        User = user;
+    public void setUserID(User user) {
+        userID = userID;
     }
 }
