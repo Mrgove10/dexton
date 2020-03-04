@@ -8,14 +8,13 @@ public class DAOConnection {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
+            try {
+                connexion = DriverManager.getConnection(Config.path, Config.user, Config.password);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         } catch (ClassNotFoundException e) {
-            System.out.println("test1");
-        }
-
-        try {
-            connexion = DriverManager.getConnection(Config.path, Config.user, Config.password);
-        } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e);
         }
 
         return connexion;

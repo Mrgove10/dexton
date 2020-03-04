@@ -1,25 +1,29 @@
 package DAO.Classes;
 
 import Beans.Role;
-import Beans.User;
 import DAO.DAO;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RoleDAO extends DAO<Role> {
     public RoleDAO(Connection conn) {
         super(conn);
     }
 
+    /**
+     * Creates a Role
+     *
+     * @param obj
+     * @return
+     */
     public boolean create(Role obj) {
-        /*
         try {
-            PreparedStatement preparedStatement = this.connect.prepareStatement("INSERT INTO Users(LASTNAME, FIRSTNAME, EMAIL, ROLE) VALUES (?,?,?,?);");
-            preparedStatement.setString(1, obj.getLastName());
-            preparedStatement.setString(2, obj.getFirstName());
-            preparedStatement.setString(3, obj.getEmail());
-            preparedStatement.setInt(4, obj.getRoleId());
-
+            PreparedStatement preparedStatement = this.connect.prepareStatement("INSERT INTO Roles(ID, NAME) VALUES (?,?);");
+            preparedStatement.setInt(1, obj.getId());
+            preparedStatement.setString(2, obj.getName());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -28,24 +32,83 @@ public class RoleDAO extends DAO<Role> {
         } finally {
             // Fermeture de la connexion
             try {
-                if (this.connect != null)
+                if (this.connect != null) {
                     this.connect.close();
-                return true;
+                    return true;
+                }
             } catch (SQLException ignore) {
                 return false;
             }
-        }*/
+        }
         return false;
     }
 
+    /**
+     * Delete a role
+     *
+     * @param obj
+     * @return
+     */
     public boolean delete(Role obj) {
+        try {
+            PreparedStatement preparedStatement = this.connect.prepareStatement("DELETE FROM Roles WHERE ID = ?");
+            preparedStatement.setInt(1, obj.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                    return true;
+                }
+            } catch (SQLException ignore) {
+                return false;
+            }
+        }
         return false;
     }
 
+    /**
+     * Updates a Role
+     *
+     * @param obj
+     * @return
+     */
     public boolean update(Role obj) {
+        try {
+            PreparedStatement preparedStatement = this.connect.prepareStatement("UPDATE Roles " +
+                    "SET NAME = ? WHERE ID = ?");
+            preparedStatement.setString(1, obj.getName());
+            preparedStatement.setInt(1, obj.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                    return true;
+                }
+            } catch (SQLException ignore) {
+                return false;
+            }
+        }
         return false;
     }
 
+    /**
+     * Find a role based on its id
+     *
+     * @param id
+     * @return
+     */
     public Role find(int id) {
         Role role = new Role();
 
@@ -55,7 +118,7 @@ public class RoleDAO extends DAO<Role> {
 
             ResultSet rs = ps.executeQuery();
 
-            while(rs.next()){
+            while (rs.next()) {
                 //Retrieve by column name
                 role.setId(rs.getInt("ID"));
                 role.setName(rs.getString("NAME"));
@@ -67,8 +130,9 @@ public class RoleDAO extends DAO<Role> {
         } finally {
             // Fermeture de la connexion
             try {
-                if (this.connect != null)
+                if (this.connect != null) {
                     this.connect.close();
+                }
             } catch (SQLException ignore) {
             }
         }
