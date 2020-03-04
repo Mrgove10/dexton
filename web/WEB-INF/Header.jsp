@@ -48,7 +48,7 @@
             <c:if test="${!empty sessionScope.id}">
                 <div id="myAccount" class="dropdown header-links pull-right">
                     <a class="dropdown-toggle dropdown-myAccount" href="Account" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-user-o "></i> ${sessionScope.nom} / ${sessionScope.prenom}
+                        <i class="fa fa-user-o "></i> ${sessionScope.nom} ${sessionScope.prenom}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                         <a class="dropdown-item" href="Account">Account Info</a> <br>
