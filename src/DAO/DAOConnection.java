@@ -6,6 +6,7 @@ public class DAOConnection {
     public static Connection ConnectDb() {
         Connection connexion = null;
 
+        //TODO: what is this ?
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {

@@ -13,6 +13,12 @@ public class UserDAO extends DAO<User> {
         super(conn);
     }
 
+    /**
+     * Creates a user
+     * @param obj
+     * @return
+     * @throws IOException
+     */
     public boolean create(User obj) throws IOException {
         try {
             PreparedStatement ps = this.connect.prepareStatement("INSERT INTO Users(LASTNAME, FIRSTNAME, EMAIL, ROLE) VALUES (?,?,?,?);");
@@ -42,6 +48,12 @@ public class UserDAO extends DAO<User> {
         return false;
     }
 
+    /**
+     * Deltes a User
+     * @param obj
+     * @return
+     * @throws IOException
+     */
     public boolean delete(User obj) throws IOException {
         try {
             PreparedStatement ps = this.connect.prepareStatement("DELETE FROM Users WHERE ID = ?");
@@ -68,6 +80,12 @@ public class UserDAO extends DAO<User> {
         return false;
     }
 
+    /**
+     * Updates a user
+     * @param obj
+     * @return
+     * @throws IOException
+     */
     public boolean update(User obj) throws IOException {
         try {
             PreparedStatement ps = this.connect.prepareStatement("UPDATE Users " +
@@ -102,6 +120,12 @@ public class UserDAO extends DAO<User> {
         return false;
     }
 
+    /**
+     * Find a user wit there id
+     * @param id
+     * @return
+     * @throws IOException
+     */
     public User find(int id) throws IOException {
         User user = new User();
         int idRole = -1;
@@ -141,6 +165,13 @@ public class UserDAO extends DAO<User> {
         return user;
     }
 
+    /**
+     * Find a user with there email ans password
+     * @param email
+     * @param password
+     * @return
+     * @throws IOException
+     */
     public User find(String email, String password) throws IOException {
         User user = new User();
         int idRole = -1;

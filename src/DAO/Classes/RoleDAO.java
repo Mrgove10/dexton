@@ -11,7 +11,13 @@ public class RoleDAO extends DAO<Role> {
         super(conn);
     }
 
+    /**
+     * Creates a Role
+     * @param obj
+     * @return
+     */
     public boolean create(Role obj) {
+        //TODO : this
         /*
         try {
             PreparedStatement preparedStatement = this.connect.prepareStatement("INSERT INTO Users(LASTNAME, FIRSTNAME, EMAIL, ROLE) VALUES (?,?,?,?);");
@@ -39,13 +45,21 @@ public class RoleDAO extends DAO<Role> {
     }
 
     public boolean delete(Role obj) {
+
+        //TODO: this
         return false;
     }
 
     public boolean update(Role obj) {
+        //TODO : this
         return false;
     }
 
+    /**
+     * Find a role based on its id
+     * @param id
+     * @return
+     */
     public Role find(int id) {
         Role role = new Role();
 
