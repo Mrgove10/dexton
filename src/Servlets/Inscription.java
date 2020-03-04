@@ -1,5 +1,6 @@
 package Servlets;
 
+import Beans.Role;
 import Beans.User;
 import DAO.Classes.UserDAO;
 import DAO.DAOConnection;
@@ -19,11 +20,17 @@ public class Inscription extends HttpServlet {
         user.setLastName(request.getParameter("nom"));
         user.setEmail(request.getParameter("email"));
         user.setPassword(request.getParameter("pwd"));
+        Role role = new Role();
+        role.setId(2);
+        role.setName("Client");
+        user.setRole(role);
         try{
             UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
-            userDAO.create(user);
+            Boolean isCreate = userDAO.create(user);
+            System.out.println(isCreate);
             response.sendRedirect( request.getContextPath() + "/Login");
         } catch (Exception e){
+            System.out.println(e);
             response.sendRedirect( request.getContextPath() + "/Signin");
         }
     }
