@@ -51,15 +51,15 @@
                         <i class="fa fa-user-o "></i> ${sessionScope.nom} ${sessionScope.prenom}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="Account">Account Info</a> <br>
-                        <a class="dropdown-item" href="Disconnect">Disconnect</a>
+                        <a class="dropdown-item" style="width: 100%" href="Account">Account Info</a> <br>
+                        <a class="dropdown-item" style="width: 100%" href="Disconnect">Disconnect</a>
                     </div>
                 </div>
             </c:if>
             <c:if test="${empty sessionScope.id}">
                 <div id="myAccount" class="dropdown header-links pull-right">
                     <a class="dropdown-myAccount" href="Account">
-                        <i class="fa fa-user-o "></i> Connection
+                        <i class="fa fa-user-o "></i> Login / Sign in
                     </a>
                 </div>
             </c:if>

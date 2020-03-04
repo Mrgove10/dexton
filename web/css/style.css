@@ -426,6 +426,10 @@ textarea.input {
   margin-right: 0;
 }
 
+.dropdown-menu {
+  text-align: center;
+}
+
 #myAccount.header-links.dropdown-toggle a:hover {
   color: #D10024;
 }
