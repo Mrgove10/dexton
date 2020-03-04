@@ -30,7 +30,7 @@ public class Index extends HttpServlet {
         user.setRole(role);
         */
         UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
-        User user = userDAO.find("edouardclisson@gmail.common", "123456");
+        User user = userDAO.find("edouardclisson@gmail.com", "123456");
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
     }
