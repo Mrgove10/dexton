@@ -19,18 +19,18 @@ public class UserDAO extends DAO<User> {
      * @return
      * @throws IOException
      */
-    public boolean create(User obj) throws IOException {
+    public boolean create(User obj) {
         try {
-            PreparedStatement ps = this.connect.prepareStatement("INSERT INTO Users(LASTNAME, FIRSTNAME, EMAIL, ROLE) VALUES (?,?,?,?);");
+            PreparedStatement ps = this.connect.prepareStatement("INSERT INTO Users(LASTNAME, FIRSTNAME, EMAIL, PASSWORD) VALUES (?,?,?,?);");
             ps.setString(1, obj.getLastName());
             ps.setString(2, obj.getFirstName());
             ps.setString(3, obj.getEmail());
-            ps.setInt(4, obj.getRoleId());
+            ps.setString(4, obj.getPassword());
 
             ps.executeUpdate();
 
         } catch (SQLException e) {
-            Logging.AddLog(Logging.Severity.Error, e.toString());
+            System.out.println(e);
             return false;
         } finally {
             // Fermeture de la connexion
@@ -40,7 +40,7 @@ public class UserDAO extends DAO<User> {
                     return true;
                 }
             } catch (SQLException ignore) {
-                Logging.AddLog(Logging.Severity.Error, ignore.toString());
+                System.out.println(ignore);
                 return false;
             }
         }
