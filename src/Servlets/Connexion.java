@@ -8,19 +8,30 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "Connexion")
 public class Connexion extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // find user in DB
-//        UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
+        var email = request.getParameter("email");
+        var password = request.getParameter("password");
 
-        // create session
+        // find user in DB
+        UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
+        var userFind = userDAO.find(email, password);
+        System.out.println(userFind);
+        if (userFind.getEmail() != null){
+            System.out.println("FIND !");
+            // create session
+            HttpSession session = request.getSession();
+            session.setAttribute("id", userFind.getId());
+        }else {
+            System.out.println("NOOOOOOO");
+        }
 
 
         response.sendRedirect(request.getContextPath()+"/Home");
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
