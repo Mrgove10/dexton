@@ -3,7 +3,7 @@
 <%@ include file="Header.jsp" %>
 <div class="container">
     <h1 style="margin: 50px">Login</h1>
-    <form style="margin: 100px" method="post">
+    <form style="margin: 100px; margin-top: 50px;" method="post">
         <div class="form-group">
             <label for="email">Email address</label>
             <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -19,6 +19,7 @@
             </div>
         </c:if>
         <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="Signin"><i class="fa fa-user-o"></i> You don't have any account ? Create it !</a>
     </form>
 </div>
 
