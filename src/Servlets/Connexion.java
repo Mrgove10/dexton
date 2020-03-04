@@ -26,16 +26,19 @@ public class Connexion extends HttpServlet {
             // create session
             HttpSession session = request.getSession();
             session.setAttribute("id", userFind.getId());
+
+            response.sendRedirect(request.getContextPath()+"/Home");
         }else {
             System.out.println("NOOOOOOO");
+            request.setAttribute("error", true);
+            this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp").forward(request, response);
         }
 
 
-        response.sendRedirect(request.getContextPath()+"/Home");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.setAttribute("error", false);
         this.getServletContext().getRequestDispatcher("/WEB-INF/Connexion.jsp").forward(request, response);
     }
 }
