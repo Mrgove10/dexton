@@ -185,7 +185,7 @@ public class UserDAO extends DAO<User> {
                 user.setId(rs.getInt("ID"));
                 user.setEmail(rs.getString("EMAIL"));
                 user.setFirstName(rs.getString("FIRSTNAME"));
-                user.setFirstName(rs.getString("LASTNAME"));
+                user.setLastName(rs.getString("LASTNAME"));
                 idRole = rs.getInt("ROLE");
             }
             rs.close();

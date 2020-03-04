@@ -422,19 +422,15 @@ textarea.input {
   color: #FFF;
 }
 
-#myAccount {
-  margin-bottom: 15px;
-}
-
-.header-links a:last-child {
+#myAccount.header-links a:last-child {
   margin-right: 0;
 }
 
-.header-links.dropdown-toggle a:hover {
+#myAccount.header-links.dropdown-toggle a:hover {
   color: #D10024;
 }
 
-.header-links i {
+#myAccount.header-links i {
   color: #D10024;
   margin-right: 5px;
 }

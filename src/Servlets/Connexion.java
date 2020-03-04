@@ -26,6 +26,8 @@ public class Connexion extends HttpServlet {
             // create session
             HttpSession session = request.getSession();
             session.setAttribute("id", userFind.getId());
+            session.setAttribute("prenom", userFind.getFirstName());
+            session.setAttribute("nom", userFind.getLastName());
 
             response.sendRedirect(request.getContextPath()+"/Home");
         }else {
