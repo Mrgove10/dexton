@@ -14,7 +14,6 @@ public class ProductDAO extends DAO<Product> {
         super(conn);
     }
 
-    @Override
     public boolean create(Product obj) throws IOException {
         try {
             PreparedStatement ps = this.connect.prepareStatement("INSERT INTO Products(NAME, PRICE, DESCRIPTION, BRAND, CATEGORY, RATING, ADDDATE) VALUES (?,?,?,?,?,?,?);");
@@ -47,7 +46,6 @@ public class ProductDAO extends DAO<Product> {
         return false;
     }
 
-    @Override
     public boolean delete(Product obj) {
         try {
             PreparedStatement preparedStatement = this.connect.prepareStatement("DELETE FROM Products WHERE ID = ?");
@@ -71,7 +69,6 @@ public class ProductDAO extends DAO<Product> {
         return false;
     }
 
-    @Override
     public boolean update(Product obj) {
         try {
             PreparedStatement ps = this.connect.prepareStatement("UPDATE Products " +

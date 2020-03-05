@@ -11,12 +11,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderDetailDAO extends DAO<Order> {
+public class OrderDetailDAO extends DAO<OrderDetail> {
     public OrderDetailDAO(Connection conn) {
         super(conn);
     }
 
-    @Override
     public boolean create(OrderDetail obj) throws IOException {
         try {
             PreparedStatement ps = this.connect.prepareStatement("INSERT INTO OrderDetails(ORDER, PRODUCT, QUANTITY) VALUES (?,?,?);");
@@ -45,7 +44,6 @@ public class OrderDetailDAO extends DAO<Order> {
         return false;
     }
 
-    @Override
     public boolean delete(OrderDetail obj) {
         try {
             PreparedStatement preparedStatement = this.connect.prepareStatement("DELETE OrderDetails Orders WHERE ID = ?");
@@ -69,7 +67,6 @@ public class OrderDetailDAO extends DAO<Order> {
         return false;
     }
 
-    @Override
     public boolean update(OrderDetail obj) {
         try {
             PreparedStatement ps = this.connect.prepareStatement("UPDATE OrderDetails " +
@@ -98,7 +95,6 @@ public class OrderDetailDAO extends DAO<Order> {
         return false;
     }
 
-    @Override
     public OrderDetail find(int id) {
         OrderDetail orderDetail = new OrderDetail();
 
@@ -112,8 +108,8 @@ public class OrderDetailDAO extends DAO<Order> {
                 //Retrieve by column name
                 orderDetail.setId(rs.getInt("ID"));
                 orderDetail.setOrder(rs.getInt("ORDER"));
-                orderDetail.setProduct(rs.getString("PRODUCT"));
-                orderDetail.setQuantity(rs.getString("QUANTITY"));
+                orderDetail.setProduct(rs.getInt("PRODUCT"));
+                orderDetail.setQuantity(rs.getInt("QUANTITY"));
             }
             rs.close();
 

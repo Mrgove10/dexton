@@ -15,7 +15,6 @@ public class OrderDAO extends DAO<Order> {
         super(conn);
     }
 
-    @Override
     public boolean create(Order obj) throws IOException {
         try {
             PreparedStatement ps = this.connect.prepareStatement("INSERT INTO Orders(USER, STATUS) VALUES (?,?);");
@@ -43,7 +42,6 @@ public class OrderDAO extends DAO<Order> {
         return false;
     }
 
-    @Override
     public boolean delete(Order obj) {
         try {
             PreparedStatement preparedStatement = this.connect.prepareStatement("DELETE FROM Orders WHERE ID = ?");
@@ -67,7 +65,6 @@ public class OrderDAO extends DAO<Order> {
         return false;
     }
 
-    @Override
     public boolean update(Order obj) {
         try {
             PreparedStatement ps = this.connect.prepareStatement("UPDATE Orders " +
@@ -94,7 +91,6 @@ public class OrderDAO extends DAO<Order> {
         return false;
     }
 
-    @Override
     public Order find(int id) {
         Order order = new Order();
 
