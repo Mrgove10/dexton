@@ -25,7 +25,7 @@ public class Order {
         return userID;
     }
 
-    public void setUserID(User user) {
+    public void setUserID(int userID) {
         userID = userID;
     }
 }

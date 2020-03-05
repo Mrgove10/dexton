@@ -7,6 +7,7 @@ import Utils.Logging;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class OrderDAO extends DAO<Order> {
@@ -44,19 +45,85 @@ public class OrderDAO extends DAO<Order> {
 
     @Override
     public boolean delete(Order obj) {
-        //TODO : this
+        try {
+            PreparedStatement preparedStatement = this.connect.prepareStatement("DELETE FROM Orders WHERE ID = ?");
+            preparedStatement.setInt(1, obj.getId());
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                    return true;
+                }
+            } catch (SQLException ignore) {
+                return false;
+            }
+        }
         return false;
     }
 
     @Override
     public boolean update(Order obj) {
-        //TODO : this
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("UPDATE Orders " +
+                    "SET USER = ?, STATUS = ?" +
+                    "WHERE ID = ?");
+            ps.setInt(1, obj.getUserID());
+            ps.setString(2, obj.getStatus());
+            ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                    return true;
+                }
+            } catch (SQLException ignore) {
+                return false;
+            }
+        }
         return false;
     }
 
     @Override
     public Order find(int id) {
-        //TODO : this
-        return null;
+        Order order = new Order();
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Orders WHERE ID = ?");
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                //Retrieve by column name
+                order.setId(rs.getInt("ID"));
+                order.setUserID(rs.getInt("USER"));
+                order.setStatus(rs.getString("STATUS"));
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                }
+            } catch (SQLException ignore) {
+            }
+        }
+
+        return order;
     }
 }
