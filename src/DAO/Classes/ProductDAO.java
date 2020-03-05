@@ -103,8 +103,8 @@ public class ProductDAO extends DAO<Product> {
         return false;
     }
 
-    public List<Product> find() {
-        List<Product> productList = new ArrayList<>();
+    public ArrayList<Product> find() {
+        ArrayList<Product> productList = new ArrayList<>();
 
         try {
             PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products");
@@ -160,6 +160,7 @@ public class ProductDAO extends DAO<Product> {
                 product.setDescription(rs.getString("DESCRIPTION"));
                 product.setPrice(rs.getFloat("PRICE"));
                 product.setRating(rs.getFloat("RATING"));
+
             }
             rs.close();
 

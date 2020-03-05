@@ -10,10 +10,13 @@
                 <li class="active"><a href="#">Home</a></li>
                 <li><a href="#">Hot Deals</a></li>
                 <li><a href="All">All</a></li>
-                <li><a href="Laptops">Laptops</a></li>
-                <li><a href="Smartphones">Smartphones</a></li>
-                <li><a href="Cameras">Cameras</a></li>
-                <li><a href="Accessories">Accessories</a></li>
+                <c:forEach items="${categories}" var="category">
+                    <li>
+                        <a href="<c:out value='${category.getName()}'/>">
+                            <c:out value='${category.getName()}'/>
+                        </a>
+                    </li>
+                </c:forEach>
             </ul>
             <!-- /NAV -->
         </div>
