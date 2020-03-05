@@ -1,13 +1,31 @@
 package Beans;
 
 public class User {
-    private int ID;
+    private int id;
     private String lastName;
     private String firstName;
     private String email;
+    private String password;
+    private Role role;
 
-    public Integer getID() {
-        return ID;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public int getRoleId() {
+        return role.getId();
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getLastName() {
@@ -32,5 +50,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

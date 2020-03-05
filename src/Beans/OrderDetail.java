@@ -1,16 +1,17 @@
 package Beans;
 
 public class OrderDetail {
-    private int ID;
+    private int id;
     private Order order;
     private Product product;
     private int quantity;
 
-    public OrderDetail() {
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
     public Order getOrder() {

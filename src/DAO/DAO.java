@@ -1,5 +1,6 @@
 package DAO;
 
+import java.io.IOException;
 import java.sql.*;
 
 public abstract class DAO<T> {
@@ -14,26 +15,26 @@ public abstract class DAO<T> {
      * @param obj
      * @return boolean
      */
-    public abstract boolean create(T obj);
+    public abstract boolean create(T obj) throws IOException;
 
     /**
      * Méthode pour effacer
      * @param obj
      * @return boolean
      */
-    public abstract boolean delete(T obj);
+    public abstract boolean delete(T obj) throws IOException;
 
     /**
      * Méthode de mise à jour
      * @param obj
      * @return boolean
      */
-    public abstract boolean update(T obj);
+    public abstract boolean update(T obj) throws IOException;
 
     /**
      * Méthode de recherche des informations
      * @param id
      * @return T
      */
-    public abstract T find(int id);
+    public abstract T find(int id) throws IOException;
 }
