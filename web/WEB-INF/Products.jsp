@@ -2,6 +2,6 @@
 
 <%@ include file="Header.jsp" %>
 
-
+<h1>Products !</h1>
 
 <%@ include file="Footer.jsp" %>

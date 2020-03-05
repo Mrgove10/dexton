@@ -82,6 +82,7 @@
         <url-pattern>/Smartphones</url-pattern>
         <url-pattern>/Cameras</url-pattern>
         <url-pattern>/Accessories</url-pattern>
+        <url-pattern>/All</url-pattern>
     </servlet-mapping>
 </web-app>
 
