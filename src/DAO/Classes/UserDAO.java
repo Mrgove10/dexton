@@ -44,7 +44,6 @@ public class UserDAO extends DAO<User> {
                 return false;
             }
         }
-
         return false;
     }
 
@@ -89,15 +88,13 @@ public class UserDAO extends DAO<User> {
     public boolean update(User obj) throws IOException {
         try {
             PreparedStatement ps = this.connect.prepareStatement("UPDATE Users " +
-                    "SET EMAIL = ?, FIRSTNAME = ?, LASTNAME = ?, PASSWORD = ?, ROLE = ?" +
+                    "SET EMAIL = ?, FIRSTNAME = ?, LASTNAME = ?" +
                     "WHERE ID = ?");
 
             ps.setString(1, obj.getEmail());
             ps.setString(2, obj.getFirstName());
             ps.setString(3, obj.getLastName());
-            ps.setString(4, obj.getPassword());
-            ps.setInt(5, obj.getRoleId());
-            ps.setInt(6, obj.getId());
+            ps.setInt(4, obj.getId());
 
             ps.executeUpdate();
 
@@ -141,7 +138,7 @@ public class UserDAO extends DAO<User> {
                 user.setId(rs.getInt("ID"));
                 user.setEmail(rs.getString("EMAIL"));
                 user.setFirstName(rs.getString("FIRSTNAME"));
-                user.setFirstName(rs.getString("LASTNAME"));
+                user.setLastName(rs.getString("LASTNAME"));
                 idRole = rs.getInt("ROLE");
             }
             rs.close();
@@ -188,7 +185,7 @@ public class UserDAO extends DAO<User> {
                 user.setId(rs.getInt("ID"));
                 user.setEmail(rs.getString("EMAIL"));
                 user.setFirstName(rs.getString("FIRSTNAME"));
-                user.setFirstName(rs.getString("LASTNAME"));
+                user.setLastName(rs.getString("LASTNAME"));
                 idRole = rs.getInt("ROLE");
             }
             rs.close();

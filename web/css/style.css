@@ -416,25 +416,25 @@ textarea.input {
   background-color: #1E1F29;
 }
 
-.header-links li {
+.dropdown-myAccount {
   display: inline-block;
-  margin-right: 15px;
   font-size: 12px;
-}
-
-.header-links li:last-child {
-  margin-right: 0px;
-}
-
-.header-links li a {
   color: #FFF;
 }
 
-.header-links li a:hover {
+#myAccount.header-links a:last-child {
+  margin-right: 0;
+}
+
+.dropdown-menu {
+  text-align: center;
+}
+
+#myAccount.header-links.dropdown-toggle a:hover {
   color: #D10024;
 }
 
-.header-links li i {
+#myAccount.header-links i {
   color: #D10024;
   margin-right: 5px;
 }

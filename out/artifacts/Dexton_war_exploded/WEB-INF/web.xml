@@ -20,5 +20,37 @@
         <servlet-name>Index</servlet-name>
         <url-pattern>/Home</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Compte</servlet-name>
+        <servlet-class>Servlets.Compte</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Compte</servlet-name>
+        <url-pattern>/Account</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Connexion</servlet-name>
+        <servlet-class>Servlets.Connexion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Connexion</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Inscription</servlet-name>
+        <servlet-class>Servlets.Inscription</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Inscription</servlet-name>
+        <url-pattern>/Signin</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>Deconnexion</servlet-name>
+        <servlet-class>Servlets.Deconnexion</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Deconnexion</servlet-name>
+        <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
 </web-app>
 
