@@ -140,4 +140,35 @@ public class    CategoryDAO extends DAO<Category> {
 
         return category;
     }
+
+    public Category find(String name) {
+        Category category = new Category();
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Categories WHERE NAME = ?");
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                //Retrieve by column name
+                category.setId(rs.getInt("ID"));
+                category.setName(rs.getString("NAME"));
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                }
+            } catch (SQLException ignore) {
+            }
+        }
+
+        return category;
+    }
 }
