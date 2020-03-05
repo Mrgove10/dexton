@@ -44,7 +44,7 @@ public class Products extends HttpServlet {
             date.add(Calendar.DATE, 7);
 
             Calendar currentDate = Calendar.getInstance();
-            date.setTime(current);
+            currentDate.setTime(current);
 
             if (date.after(currentDate) || date.equals(currentDate)){
                 listNewProducts.add(product);
