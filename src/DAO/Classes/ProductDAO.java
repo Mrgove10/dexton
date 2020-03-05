@@ -1,6 +1,5 @@
 package DAO.Classes;
 
-import Beans.Order;
 import Beans.Product;
 import DAO.DAO;
 import Utils.Logging;
@@ -8,6 +7,7 @@ import Utils.Logging;
 import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ProductDAO extends DAO<Product> {
     public ProductDAO(Connection conn) {
@@ -103,19 +103,50 @@ public class ProductDAO extends DAO<Product> {
         return false;
     }
 
+    public List<Product> find() {
+        List<Product> productList = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                //Retrieve by column name
+                product.setId(rs.getInt("ID"));
+                product.setName(rs.getString("NAME"));
+                product.setBrand(rs.getString("BRAND"));
+                product.setAddDate(rs.getDate("ADDDATE"));
+                product.setCategoryID(rs.getInt("CATEGORY"));
+                product.setDescription(rs.getString("DESCRIPTION"));
+                product.setPrice(rs.getFloat("PRICE"));
+                product.setRating(rs.getFloat("RATING"));
+                productList.add(product);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                }
+            } catch (SQLException ignore) {
+            }
+        }
+        return productList;
+    }
 
     public Product find(int id) {
         Product product = new Product();
 
         try {
-            if(id == -1){
-                PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products");
-            }
-            else
-            {
-                PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products WHERE ID = ?");
-                ps.setInt(1, id);
-            }
+
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products WHERE ID = ?");
+            ps.setInt(1, id);
+
 
             ResultSet rs = ps.executeQuery();
 
