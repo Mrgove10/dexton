@@ -6,10 +6,8 @@ import DAO.DAO;
 import Utils.Logging;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class ProductDAO extends DAO<Product> {
     public ProductDAO(Connection conn) {
@@ -141,5 +139,44 @@ public class ProductDAO extends DAO<Product> {
         }
 
         return product;
+    }
+
+    public ArrayList<Product> findProductsFromCategory(int categoryID) {
+        ArrayList<Product> productList = new ArrayList<Product>();
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products WHERE CATEGORY = ?");
+            ps.setInt(1, categoryID);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                //Retrieve by column name
+                Product product = new Product();
+                product.setId(rs.getInt("ID"));
+                product.setName(rs.getString("NAME"));
+                product.setBrand(rs.getString("BRAND"));
+                product.setAddDate(rs.getDate("ADDDATE"));
+                product.setCategoryID(rs.getInt("CATEGORY"));
+                product.setDescription(rs.getString("DESCRIPTION"));
+                product.setPrice(rs.getFloat("PRICE"));
+                product.setRating(rs.getFloat("RATING"));
+                productList.add(product);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                }
+            } catch (SQLException ignore) {
+            }
+        }
+
+        return productList;
     }
 }
