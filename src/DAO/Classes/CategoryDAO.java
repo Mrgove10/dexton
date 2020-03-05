@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class    CategoryDAO extends DAO<Category> {
     public CategoryDAO(Connection conn) {
@@ -170,5 +171,36 @@ public class    CategoryDAO extends DAO<Category> {
         }
 
         return category;
+    }
+
+    public ArrayList<Category> findAll() {
+        ArrayList<Category> listCategory = new ArrayList<Category>();
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Categories");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                //Retrieve by column name
+                Category category = new Category();
+                category.setId(rs.getInt("ID"));
+                category.setName(rs.getString("NAME"));
+                listCategory.add(category);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                }
+            } catch (SQLException ignore) {
+            }
+        }
+
+        return listCategory;
     }
 }
