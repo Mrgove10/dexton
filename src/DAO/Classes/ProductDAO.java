@@ -108,9 +108,15 @@ public class ProductDAO extends DAO<Product> {
         Product product = new Product();
 
         try {
-            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products WHERE ID = ?");
-            ps.setInt(1, id);
-
+            if(id == -1){
+                PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products");
+            }
+            else
+            {
+                PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products WHERE ID = ?");
+                ps.setInt(1, id);
+            }
+            
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
