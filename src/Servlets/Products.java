@@ -28,7 +28,7 @@ public class Products extends HttpServlet {
         ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
         var listProducts = new ArrayList<Product>();
         if (categoryName.equals("All")){
-//            listProducts = productDAO.find();
+            listProducts = productDAO.find();
         }else {
             CategoryDAO categoryDAO = new CategoryDAO(DAOConnection.ConnectDb());
             var category = categoryDAO.find(categoryName);

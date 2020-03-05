@@ -7,7 +7,7 @@
         <div id="responsive-nav">
             <!-- NAV -->
             <ul class="main-nav nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="Home">Home</a></li>
                 <li><a href="#">Hot Deals</a></li>
                 <li><a href="All">All</a></li>
                 <c:forEach items="${categories}" var="category">
