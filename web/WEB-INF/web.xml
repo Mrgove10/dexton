@@ -52,5 +52,13 @@
         <servlet-name>Deconnexion</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>Cart</servlet-name>
+        <servlet-class>Servlets.Cart</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Cart</servlet-name>
+        <url-pattern>/Cart</url-pattern>
+    </servlet-mapping>
 </web-app>
 
