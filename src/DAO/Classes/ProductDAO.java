@@ -106,14 +106,14 @@ public class ProductDAO extends DAO<Product> {
 
     public Product find(int id) {
         Product product = new Product();
-
+        PreparedStatement ps;
         try {
             if(id == -1){
-                PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products");
+                ps = this.connect.prepareStatement("SELECT * FROM Products");
             }
             else
             {
-                PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Products WHERE ID = ?");
+                ps = this.connect.prepareStatement("SELECT * FROM Products WHERE ID = ?");
                 ps.setInt(1, id);
             }
             
