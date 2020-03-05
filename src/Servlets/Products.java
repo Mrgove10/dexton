@@ -19,7 +19,8 @@ public class Products extends HttpServlet {
         var arrayUrl = url.split("/");
         var categoryName = arrayUrl[arrayUrl.length-1];
         System.out.println(categoryName);
-        
+        CategoryDAO categoryDAO = new CategoryDAO(DAOConnection.ConnectDb());
+        var category = categoryDAO.find(categoryName);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/Products.jsp").forward(request, response);
     }
