@@ -1,14 +1,26 @@
 package Beans;
 
+
+import java.sql.Date;
+
 public class Product {
 
     private int id;
     private String name;
     private float price;
     private String description;
-    private Category Category;
+    private int categoryID;
     private float rating;
     private Date addDate;
+    private String brand;
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
 
     public int getId() {
         return id;
@@ -42,12 +54,12 @@ public class Product {
         this.description = description;
     }
 
-    public Beans.Category getCategory() {
-        return Category;
+    public int getCategoryID() {
+        return categoryID;
     }
 
-    public void setCategory(Beans.Category category) {
-        Category = category;
+    public void setCategoryID(int categoryID) {
+        categoryID = categoryID;
     }
 
     public float getRating() {
