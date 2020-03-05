@@ -7,6 +7,7 @@ import DAO.DAOConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +29,9 @@ public class Inscription extends HttpServlet {
             UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
             Boolean isCreate = userDAO.create(user);
             System.out.println(isCreate);
+            Cookie cookie = new Cookie("email", request.getParameter("email"));
+            cookie.setMaxAge(60 * 60 * 24 * 7);
+            response.addCookie(cookie);
             response.sendRedirect( request.getContextPath() + "/Login");
         } catch (Exception e){
             System.out.println(e);
