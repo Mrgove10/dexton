@@ -118,20 +118,15 @@
                                                 </c:forEach>
                                             </div>
                                             <div class="product-btns">
-                                                <form method="post">
-                                                    <button class="add-to-wishlist"  type="submit" name="wishlist">
-                                                        <i class="fa fa-heart-o"></i>
-                                                        <span class="tooltipp">
-                                                            add to wishlist
-                                                        </span>
-                                                    </button>
+                                                <form method="post" class="product-btns">
+                                                    <button class="add-to-wishlist" type="submit" name="wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
                                                 </form>
                                             </div>
                                         </div>
                                         <div class="add-to-cart">
                                             <form method="post">
                                                 <input type="hidden" name="product" value="${product.getId()}"/>
-                                                <button class="add-to-cart-btn" type="submit" name="cart">
+                                                <button class="add-to-cart-btn" type="submit" name="addToCart">
                                                     <i class="fa fa-shopping-cart"></i>add to cart
                                                 </button>
                                             </form>

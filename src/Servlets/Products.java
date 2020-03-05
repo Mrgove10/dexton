@@ -60,8 +60,8 @@ public class Products extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("cart") != null){
-            
+        if (request.getParameter("addToCart") != null){
+
             var id = Integer.parseInt(request.getParameter("product"));
             ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
             var product = productDAO.find(id);
