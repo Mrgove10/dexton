@@ -20,6 +20,8 @@
         <servlet-name>Index</servlet-name>
         <url-pattern>/Home</url-pattern>
     </servlet-mapping>
+
+    <!--Account-->
     <servlet>
         <servlet-name>Compte</servlet-name>
         <servlet-class>Servlets.Compte</servlet-class>
@@ -28,6 +30,8 @@
         <servlet-name>Compte</servlet-name>
         <url-pattern>/Account</url-pattern>
     </servlet-mapping>
+
+    <!--Login-->
     <servlet>
         <servlet-name>Connexion</servlet-name>
         <servlet-class>Servlets.Connexion</servlet-class>
@@ -36,6 +40,8 @@
         <servlet-name>Connexion</servlet-name>
         <url-pattern>/Login</url-pattern>
     </servlet-mapping>
+
+    <!--Signin-->
     <servlet>
         <servlet-name>Inscription</servlet-name>
         <servlet-class>Servlets.Inscription</servlet-class>
@@ -44,6 +50,8 @@
         <servlet-name>Inscription</servlet-name>
         <url-pattern>/Signin</url-pattern>
     </servlet-mapping>
+
+    <!--Logout-->
     <servlet>
         <servlet-name>Deconnexion</servlet-name>
         <servlet-class>Servlets.Deconnexion</servlet-class>
@@ -52,6 +60,8 @@
         <servlet-name>Deconnexion</servlet-name>
         <url-pattern>/Logout</url-pattern>
     </servlet-mapping>
+
+    <!--Cart-->
     <servlet>
         <servlet-name>Cart</servlet-name>
         <servlet-class>Servlets.Cart</servlet-class>
@@ -59,6 +69,19 @@
     <servlet-mapping>
         <servlet-name>Cart</servlet-name>
         <url-pattern>/Cart</url-pattern>
+    </servlet-mapping>
+
+    <!--Products-->
+    <servlet>
+        <servlet-name>Products</servlet-name>
+        <servlet-class>Servlets.Products</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Products</servlet-name>
+        <url-pattern>/Laptops</url-pattern>
+        <url-pattern>/Smartphones</url-pattern>
+        <url-pattern>/Cameras</url-pattern>
+        <url-pattern>/Accessories</url-pattern>
     </servlet-mapping>
 </web-app>
 
