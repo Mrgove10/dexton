@@ -2,8 +2,8 @@ package Beans;
 
 public class OrderDetail {
     private int id;
-    private Order order;
-    private Product product;
+    private int orderid;
+    private int productid;
     private int quantity;
 
     public void setId(int id) {
@@ -14,20 +14,20 @@ public class OrderDetail {
         return id;
     }
 
-    public Order getOrder() {
-        return order;
+    public int getOrder() {
+        return orderid;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrder(int order) {
+        this.orderid = order;
     }
 
-    public Product getProduct() {
-        return product;
+    public int getProduct() {
+        return productid;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProduct(int product) {
+        this.productid = product;
     }
 
     public int getQuantity() {
