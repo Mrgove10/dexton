@@ -1,6 +1,7 @@
 package DAO.Classes;
 
 import Beans.Order;
+import Beans.OrderDetail;
 import DAO.DAO;
 import Utils.Logging;
 
@@ -10,16 +11,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class OrderDAO extends DAO<Order> {
-    public OrderDAO(Connection conn) {
+public class OrderDetailDAO extends DAO<OrderDetail> {
+    public OrderDetailDAO(Connection conn) {
         super(conn);
     }
 
-    public boolean create(Order obj) throws IOException {
+    public boolean create(OrderDetail obj) throws IOException {
         try {
-            PreparedStatement ps = this.connect.prepareStatement("INSERT INTO Orders(USER, STATUS) VALUES (?,?);");
-            ps.setInt(1, obj.getUserID());
-            ps.setString(2, obj.getStatus());
+            PreparedStatement ps = this.connect.prepareStatement("INSERT INTO OrderDetails(ORDER, PRODUCT, QUANTITY) VALUES (?,?,?);");
+            ps.setInt(1, obj.getOrder());
+            ps.setInt(2, obj.getProduct());
+            ps.setInt(3, obj.getQuantity());
 
             ps.executeUpdate();
 
@@ -34,7 +36,7 @@ public class OrderDAO extends DAO<Order> {
                     return true;
                 }
             } catch (SQLException ignore) {
-                Logging.AddLog(Logging.Severity.Error, ignore.toString());
+            //    Logging.AddLog(Logging.Severity.Error, ignore.toString());
                 return false;
             }
         }
@@ -42,9 +44,9 @@ public class OrderDAO extends DAO<Order> {
         return false;
     }
 
-    public boolean delete(Order obj) {
+    public boolean delete(OrderDetail obj) {
         try {
-            PreparedStatement preparedStatement = this.connect.prepareStatement("DELETE FROM Orders WHERE ID = ?");
+            PreparedStatement preparedStatement = this.connect.prepareStatement("DELETE OrderDetails Orders WHERE ID = ?");
             preparedStatement.setInt(1, obj.getId());
             preparedStatement.executeUpdate();
 
@@ -65,13 +67,15 @@ public class OrderDAO extends DAO<Order> {
         return false;
     }
 
-    public boolean update(Order obj) {
+    public boolean update(OrderDetail obj) {
         try {
-            PreparedStatement ps = this.connect.prepareStatement("UPDATE Orders " +
-                    "SET USER = ?, STATUS = ?" +
+            PreparedStatement ps = this.connect.prepareStatement("UPDATE OrderDetails " +
+                    "SET ORDER = ?, PRODUCT = ?, QUANTITY = ?" +
                     "WHERE ID = ?");
-            ps.setInt(1, obj.getUserID());
-            ps.setString(2, obj.getStatus());
+            ps.setInt(1, obj.getOrder());
+            ps.setInt(1, obj.getProduct());
+            ps.setInt(1, obj.getQuantity());
+            ps.setInt(1, obj.getId());
             ps.executeUpdate();
 
         } catch (SQLException e) {
@@ -91,20 +95,21 @@ public class OrderDAO extends DAO<Order> {
         return false;
     }
 
-    public Order find(int id) {
-        Order order = new Order();
+    public OrderDetail find(int id) {
+        OrderDetail orderDetail = new OrderDetail();
 
         try {
-            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Orders WHERE ID = ?");
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM OrderDetails WHERE ID = ?");
             ps.setInt(1, id);
 
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 //Retrieve by column name
-                order.setId(rs.getInt("ID"));
-                order.setUserID(rs.getInt("USER"));
-                order.setStatus(rs.getString("STATUS"));
+                orderDetail.setId(rs.getInt("ID"));
+                orderDetail.setOrder(rs.getInt("ORDER"));
+                orderDetail.setProduct(rs.getInt("PRODUCT"));
+                orderDetail.setQuantity(rs.getInt("QUANTITY"));
             }
             rs.close();
 
@@ -120,6 +125,6 @@ public class OrderDAO extends DAO<Order> {
             }
         }
 
-        return order;
+        return orderDetail;
     }
 }
