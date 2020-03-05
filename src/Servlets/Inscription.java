@@ -21,14 +21,9 @@ public class Inscription extends HttpServlet {
         user.setLastName(request.getParameter("nom"));
         user.setEmail(request.getParameter("email"));
         user.setPassword(request.getParameter("pwd"));
-        Role role = new Role();
-        role.setId(2);
-        role.setName("Client");
-        user.setRole(role);
         try{
             UserDAO userDAO = new UserDAO(DAOConnection.ConnectDb());
-            Boolean isCreate = userDAO.create(user);
-            System.out.println(isCreate);
+            userDAO.create(user);
             Cookie cookie = new Cookie("email", request.getParameter("email"));
             cookie.setMaxAge(60 * 60 * 24 * 7);
             response.addCookie(cookie);
