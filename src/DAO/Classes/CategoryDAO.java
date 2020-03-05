@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CategoryDAO extends DAO<Category> {
+public class    CategoryDAO extends DAO<Category> {
     public CategoryDAO(Connection conn) {
         super(conn);
     }

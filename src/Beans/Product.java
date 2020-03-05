@@ -8,6 +8,7 @@ public class Product {
     private String description;
     private Category Category;
     private float rating;
+    private Date addDate;
 
     public int getId() {
         return id;
@@ -55,5 +56,13 @@ public class Product {
 
     public void setRating(float rating) {
         this.rating = rating;
+    }
+
+    public Date getAddDate() {
+        return addDate;
+    }
+
+    public void setAddDate(Date addDate) {
+        this.addDate = addDate;
     }
 }
