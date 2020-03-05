@@ -25,7 +25,7 @@
                                         <div class="product-img">
                                             <img src="./img/product01.png" alt="">
                                             <div class="product-label">
-                                                    <%--                                        <span class="sale">-30%</span>--%>
+                                                    <%--<span class="sale">-30%</span>--%>
                                                 <span class="new">NEW</span>
                                             </div>
                                         </div>
@@ -40,7 +40,7 @@
                                             <h3 class="product-name"><a href="#">${product.getName()}</a></h3>
                                             <h4 class="product-price">
                                                 $ ${product.getPrice()}
-                                                    <%--                                        <del class="product-old-price">$990.00</del>--%>
+                                                    <%--<del class="product-old-price">$990.00</del>--%>
                                             </h4>
                                             <div class="product-rating">
                                                 <c:forEach begin="1" end="${product.getRating()}" step="1" var="i">
@@ -118,11 +118,23 @@
                                                 </c:forEach>
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <form method="post">
+                                                    <button class="add-to-wishlist"  type="submit" name="wishlist">
+                                                        <i class="fa fa-heart-o"></i>
+                                                        <span class="tooltipp">
+                                                            add to wishlist
+                                                        </span>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                            <form method="post">
+                                                <input type="hidden" name="product" value="${product.getId()}"/>
+                                                <button class="add-to-cart-btn" type="submit" name="cart">
+                                                    <i class="fa fa-shopping-cart"></i>add to cart
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </c:forEach>

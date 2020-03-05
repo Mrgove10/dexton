@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -59,7 +60,26 @@ public class Products extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("cart") != null){
+            
+            var id = Integer.parseInt(request.getParameter("product"));
+            ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
+            var product = productDAO.find(id);
 
+            HttpSession session = request.getSession();
+            ArrayList<Product> list = (ArrayList<Product>) session.getAttribute("list_products");
+            if (list == null){
+                list = new ArrayList<>();
+            }
+
+            list.add(product);
+            session.setAttribute("list_products", list);
+        }
+
+        String url = request.getRequestURL().toString();
+        var arrayUrl = url.split("/");
+        var categoryName = arrayUrl[arrayUrl.length-1];
+        response.sendRedirect(request.getContextPath()+"/"+categoryName);
     }
 
     private ArrayList<Category> Navigation(){
