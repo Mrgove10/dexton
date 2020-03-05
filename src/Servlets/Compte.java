@@ -6,10 +6,7 @@ import DAO.DAOConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 @WebServlet(name = "Compte")
@@ -33,6 +30,10 @@ public class Compte extends HttpServlet {
 
             session.setAttribute("prenom", user.getFirstName());
             session.setAttribute("nom", user.getLastName());
+
+            Cookie cookie = new Cookie("email", user.getEmail());
+            cookie.setMaxAge(60 * 60 * 24 * 7);
+            response.addCookie(cookie);
 
             System.out.println("Is Update ? "+isUpdate);
         }catch (Exception e){
