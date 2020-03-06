@@ -100,6 +100,57 @@ public class ProductDAO extends DAO<Product> {
         return false;
     }
 
+    public ArrayList<Product> FindByCategoryAndName(String name, int category){
+        ArrayList<Product> productList = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = null;
+            if (category != 0 && !name.isEmpty()){
+                System.out.println("step 1");
+                ps = this.connect.prepareStatement("SELECT * FROM Products WHERE CATEGORY = ? AND LOWER(NAME) LIKE LOWER(?)");
+                ps.setInt(1, category);
+                ps.setString(2, '%'+name+'%');
+            }else if (category != 0){
+                System.out.println("step 2");
+                ps = this.connect.prepareStatement("SELECT * FROM Products WHERE CATEGORY = ?");
+                ps.setInt(1, category);
+            }else if (!name.isEmpty()){
+                System.out.println("step 3");
+                ps = this.connect.prepareStatement("SELECT * FROM Products WHERE LOWER(NAME) LIKE LOWER(?)");
+                ps.setString(1, "%"+name+"%");
+            }
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Product product = new Product();
+                //Retrieve by column name
+                product.setId(rs.getInt("ID"));
+                product.setName(rs.getString("NAME"));
+                product.setBrand(rs.getString("BRAND"));
+                product.setAddDate(rs.getDate("ADDDATE"));
+                product.setCategoryID(rs.getInt("CATEGORY"));
+                product.setDescription(rs.getString("DESCRIPTION"));
+                product.setPrice(rs.getFloat("PRICE"));
+                product.setRating(rs.getFloat("RATING"));
+                productList.add(product);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                }
+            } catch (SQLException ignore) {
+            }
+        }
+        return productList;
+    }
+
     public ArrayList<Product> find() {
         ArrayList<Product> productList = new ArrayList<>();
 

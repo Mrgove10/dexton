@@ -54,6 +54,7 @@ public class Index extends HttpServlet {
             session.setAttribute("list_products", list);
         }
 
+
         String url = request.getRequestURL().toString();
         var arrayUrl = url.split("/");
         var categoryName = arrayUrl[arrayUrl.length-1];
@@ -61,6 +62,15 @@ public class Index extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("search") != null){
+            var idCategory = Integer.parseInt(request.getParameter("searchCategory"));
+            var searchWord = request.getParameter("searchWord");
+
+            ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
+            var list = productDAO.FindByCategoryAndName(searchWord, idCategory);
+            System.out.println(list);
+        }
+
         ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
         var listProducts = productDAO.find();
         var listNewProducts = new ArrayList<Product>();

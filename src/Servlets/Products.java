@@ -24,18 +24,23 @@ public class Products extends HttpServlet {
         var arrayUrl = url.split("/");
         var categoryName = arrayUrl[arrayUrl.length-1];
         System.out.println(categoryName);
-
+        var categoryId = Integer.parseInt(request.getParameter("searchCategory"));
+        var searchWord = request.getParameter("searchWord");
 
         ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
         var listProducts = new ArrayList<Product>();
-        if (categoryName.equals("All")){
-            listProducts = productDAO.find();
-        }else {
-            CategoryDAO categoryDAO = new CategoryDAO(DAOConnection.ConnectDb());
-            var category = categoryDAO.find(categoryName);
+        listProducts = productDAO.FindByCategoryAndName(searchWord,categoryId);
+        if (listProducts.size() == 0){
+            if (categoryName.equals("All")){
+                listProducts = productDAO.find();
+            }else {
+                CategoryDAO categoryDAO = new CategoryDAO(DAOConnection.ConnectDb());
+                var category = categoryDAO.find(categoryName);
 
-            listProducts = productDAO.findProductsFromCategory(category.getId());
+                listProducts = productDAO.findProductsFromCategory(category.getId());
+            }
         }
+
         var listNewProducts = new ArrayList<Product>();
         for (Product product : listProducts) {
             Date current = new Date();

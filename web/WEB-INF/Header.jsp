@@ -101,14 +101,15 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <select class="input-select">
-                                <option value="0">All Categories</option>
-                                <option value="1">Category 01</option>
-                                <option value="1">Category 02</option>
+                        <form action="All">
+                            <select class="input-select" name="searchCategory">
+                                <option value="0" selected>N/A</option>
+                                <c:forEach items="${categories}" var="category">
+                                    <option value="${category.getId()}">${category.getName()}</option>
+                                </c:forEach>
                             </select>
-                            <input class="input" placeholder="Search here">
-                            <button class="search-btn">Search</button>
+                            <input class="input" type="text" placeholder="Search here" name="searchWord">
+                            <button class="search-btn" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
