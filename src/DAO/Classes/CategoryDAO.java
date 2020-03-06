@@ -10,8 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class CategoryDAO extends DAO<Category> {
+public class    CategoryDAO extends DAO<Category> {
     public CategoryDAO(Connection conn) {
         super(conn);
     }
@@ -139,5 +140,67 @@ public class CategoryDAO extends DAO<Category> {
         }
 
         return category;
+    }
+
+    public Category find(String name) {
+        Category category = new Category();
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Categories WHERE NAME = ?");
+            ps.setString(1, name);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                //Retrieve by column name
+                category.setId(rs.getInt("ID"));
+                category.setName(rs.getString("NAME"));
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                }
+            } catch (SQLException ignore) {
+            }
+        }
+
+        return category;
+    }
+
+    public ArrayList<Category> findAll() {
+        ArrayList<Category> listCategory = new ArrayList<Category>();
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Categories");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                //Retrieve by column name
+                Category category = new Category();
+                category.setId(rs.getInt("ID"));
+                category.setName(rs.getString("NAME"));
+                listCategory.add(category);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                }
+            } catch (SQLException ignore) {
+            }
+        }
+
+        return listCategory;
     }
 }
