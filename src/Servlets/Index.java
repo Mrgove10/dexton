@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -22,7 +23,41 @@ import java.util.Date;
 @WebServlet(name = "Index", urlPatterns = {"/Home"})
 public class Index extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        if (request.getParameter("addToCart") != null){
 
+            var id = Integer.parseInt(request.getParameter("product"));
+            ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
+            var product = productDAO.find(id);
+            int quantity = product.getQuantity();
+            if (quantity == 0){
+                product.setQuantity(1);
+                quantity = 1;
+            }
+            System.out.println(quantity);
+
+            HttpSession session = request.getSession();
+            ArrayList<Product> list = (ArrayList<Product>) session.getAttribute("list_products");
+            if (list == null){
+                list = new ArrayList<>();
+            }
+            boolean isAlone = true;
+            for (Product prod: list) {
+                if (prod.getId() == product.getId()){
+                    prod.setQuantity(quantity + 1);
+                    isAlone = false;
+                }
+            }
+            if (isAlone){
+                list.add(product);
+            }
+            System.out.println(product.getQuantity());
+            session.setAttribute("list_products", list);
+        }
+
+        String url = request.getRequestURL().toString();
+        var arrayUrl = url.split("/");
+        var categoryName = arrayUrl[arrayUrl.length-1];
+        response.sendRedirect(request.getContextPath()+"/"+categoryName);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
