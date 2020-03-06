@@ -6,9 +6,9 @@
 <div class="container">
     <h1 class="text-center">Your Cart</h1>
     <c:if test="${!empty sessionScope.list_products}">
-        <div class="cart-list" style="width: 250px" >
+        <div class="cart-list" style="width: 100%" >
             <c:forEach items="${ sessionScope.list_products }" var="list_product" varStatus="status">
-                <form action="Cart" method="post">
+                <form action="Cart" method="post" style="margin: auto; width: 300px">
                     <div class="product-widget">
                         <div class="product-img">
                             <img src="./img/product01.png" alt="">
