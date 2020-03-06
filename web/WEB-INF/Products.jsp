@@ -25,8 +25,12 @@
                                         <div class="product-img">
                                             <img src="./img/product01.png" alt="">
                                             <div class="product-label">
-                                                    <%--<span class="sale">-30%</span>--%>
-                                                <span class="new">NEW</span>
+                                                    <%--                                        <span class="sale">-30%</span>--%>
+                                                <c:forEach items="${listNewProducts}" var="newProduct">
+                                                    <c:if test="${newProduct == product}">
+                                                        <span class="new">NEW</span>
+                                                    </c:if>
+                                                </c:forEach>
                                             </div>
                                         </div>
                                         <div class="product-body">
@@ -40,7 +44,7 @@
                                             <h3 class="product-name"><a href="#">${product.getName()}</a></h3>
                                             <h4 class="product-price">
                                                 $ ${product.getPrice()}
-                                                    <%--<del class="product-old-price">$990.00</del>--%>
+                                                    <%--                                        <del class="product-old-price">$990.00</del>--%>
                                             </h4>
                                             <div class="product-rating">
                                                 <c:forEach begin="1" end="${product.getRating()}" step="1" var="i">
@@ -48,11 +52,18 @@
                                                 </c:forEach>
                                             </div>
                                             <div class="product-btns">
-                                                <button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                <form method="post" class="product-btns">
+                                                    <button class="add-to-wishlist" type="submit" name="wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">add to wishlist</span></button>
+                                                </form>
                                             </div>
                                         </div>
                                         <div class="add-to-cart">
-                                            <button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> add to cart</button>
+                                            <form method="post">
+                                                <input type="hidden" name="product" value="${product.getId()}"/>
+                                                <button class="add-to-cart-btn" type="submit" name="addToCart">
+                                                    <i class="fa fa-shopping-cart"></i>add to cart
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </c:forEach>
@@ -124,12 +135,24 @@
                                             </div>
                                         </div>
                                         <div class="add-to-cart">
-                                            <form method="post">
-                                                <input type="hidden" name="product" value="${product.getId()}"/>
-                                                <button class="add-to-cart-btn" type="submit" name="addToCart">
-                                                    <i class="fa fa-shopping-cart"></i>add to cart
-                                                </button>
-                                            </form>
+                                            <c:choose>
+                                                <c:when test="${request.getSession().getAttribute('list_products').contains(product)}">
+                                                    <form method="post">
+                                                        <input type="hidden" name="product" value="${product.getId()}"/>
+                                                        <button class="add-to-cart-btn" type="submit" name="removeToCart">
+                                                            <i class="fas fa-trash-alt"></i>remove to cart
+                                                        </button>
+                                                    </form>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <form method="post">
+                                                        <input type="hidden" name="product" value="${product.getId()}"/>
+                                                        <button class="add-to-cart-btn" type="submit" name="addToCart">
+                                                            <i class="fa fa-shopping-cart"></i>add to cart
+                                                        </button>
+                                                    </form>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </c:forEach>
