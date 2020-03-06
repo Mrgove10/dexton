@@ -1,5 +1,20 @@
+<%@ page import="Beans.Product" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%
+    ArrayList<Product> list = (ArrayList<Product>) session.getAttribute("list_products");
+    int total_product = 0;
+    if (list != null){
+        for (Product product: list) {
+            total_product += product.getQuantity();
+        }
+    }
+
+    pageContext.setAttribute("total_product", total_product);
+
+%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -118,12 +133,7 @@
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Your Cart</span>
                                 <div class="qty">
-                                    <c:if test="${!empty sessionScope.list_products.size()}">
-                                        <c:out value="${sessionScope.list_products.size()}"/>
-                                    </c:if>
-                                    <c:if test="${empty sessionScope.list_products.size()}">
-                                        0
-                                    </c:if>
+                                    <c:out value="${total_product}"/>
                                 </div>
                             </a>
                         </div>
