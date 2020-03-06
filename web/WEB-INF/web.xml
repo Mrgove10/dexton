@@ -81,6 +81,16 @@
         <url-pattern>/Paiement</url-pattern>
     </servlet-mapping>
 
+    <!--Admin-->
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>Servlets.Admin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    
     <!--Products-->
     <servlet>
         <servlet-name>Products</servlet-name>
