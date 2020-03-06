@@ -65,14 +65,29 @@ public class Products extends HttpServlet {
             var id = Integer.parseInt(request.getParameter("product"));
             ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
             var product = productDAO.find(id);
+            int quantity = product.getQuantity();
+            if (quantity == 0){
+                product.setQuantity(1);
+                quantity = 1;
+            }
+            System.out.println(quantity);
 
             HttpSession session = request.getSession();
             ArrayList<Product> list = (ArrayList<Product>) session.getAttribute("list_products");
             if (list == null){
                 list = new ArrayList<>();
             }
-
-            list.add(product);
+            boolean isAlone = true;
+            for (Product prod: list) {
+                if (prod.getId() == product.getId()){
+                    prod.setQuantity(quantity + 1);
+                    isAlone = false;
+                }
+            }
+            if (isAlone){
+                list.add(product);
+            }
+            System.out.println(product.getQuantity());
             session.setAttribute("list_products", list);
         }
 

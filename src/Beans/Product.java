@@ -13,6 +13,7 @@ public class Product {
     private float rating;
     private Date addDate;
     private String brand;
+    private int quantity;
 
     public String getBrand() {
         return brand;
@@ -77,4 +78,13 @@ public class Product {
     public void setAddDate(Date addDate) {
         this.addDate = addDate;
     }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
 }
