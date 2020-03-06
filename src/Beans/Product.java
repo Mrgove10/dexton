@@ -59,7 +59,7 @@ public class Product {
     }
 
     public void setCategoryID(int categoryID) {
-        categoryID = categoryID;
+        this.categoryID = categoryID;
     }
 
     public float getRating() {

@@ -54,12 +54,9 @@
         <div class="section-title">
           <h3 class="title">New Products</h3>
           <div class="section-nav">
-<%--            <ul class="section-tab-nav tab-nav">--%>
-<%--              <li class="active"><a data-toggle="tab" href="#tab1">Laptops</a></li>--%>
-<%--              <li><a data-toggle="tab" href="#tab1">Smartphones</a></li>--%>
-<%--              <li><a data-toggle="tab" href="#tab1">Cameras</a></li>--%>
-<%--              <li><a data-toggle="tab" href="#tab1">Accessories</a></li>--%>
-<%--            </ul>--%>
+            <ul class="section-tab-nav tab-nav">
+              <li class="active"><a data-toggle="tab" href="#tab1">All</a></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -71,11 +68,26 @@
           <div class="products-tabs">
             <!-- tab -->
             <div class="tab-pane active">
-              <div class="products-slick" data-nav="#slick-nav-1">
+              <div class="products-slick" data-nav="#slick-nav-3">
                 <c:forEach items="${listNewProducts}" var="product">
                   <div class="product">
                     <div class="product-img">
-                      <img src="./img/product01.png" alt="">
+                      <c:forEach items="${categories}" var="category">
+                        <c:if test="${category.getId() == product.getCategoryID()}">
+                          <c:if test="${category.getName() == 'Laptops'}">
+                            <img src="./img/shop01.png" alt="">
+                          </c:if>
+                          <c:if test="${category.getName() == 'Cameras'}">
+                            <img src="./img/shop02.png" alt="">
+                          </c:if>
+                          <c:if test="${category.getName() == 'Accessories'}">
+                            <img src="./img/shop03.png" alt="">
+                          </c:if>
+                          <c:if test="${category.getName() == 'Smartphones'}">
+                            <img src="./img/shop04.png" alt="">
+                          </c:if>
+                        </c:if>
+                      </c:forEach>
                       <div class="product-label">
                           <%--                                        <span class="sale">-30%</span>--%>
                         <c:forEach items="${listNewProducts}" var="newProduct">
@@ -120,7 +132,7 @@
                   </div>
                 </c:forEach>
               </div>
-              <div id="slick-nav-1" class="products-slick-nav"></div>
+              <div id="slick-nav-3" class="products-slick-nav"></div>
             </div>
             <!-- /tab -->
           </div>
