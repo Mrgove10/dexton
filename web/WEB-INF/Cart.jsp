@@ -44,7 +44,7 @@
             <h5>SUBTOTAL: $<c:out value='${requestScope.total}' /></h5>
         </div>
         <div class="cart-btns text-center">
-            <a href="#" style="font-size: 18px">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="Paiement" style="font-size: 18px">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </c:if>
 
