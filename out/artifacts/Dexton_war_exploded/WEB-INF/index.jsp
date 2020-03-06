@@ -9,7 +9,7 @@
     <!-- row -->
     <div class="row">
       <c:forEach items="${categories}" var="category">
-        <div class="col-md-4 col-xs-6">
+        <div class="col-md-3 col-xs-6">
           <div class="shop">
             <div class="shop-img">
               <c:choose>
