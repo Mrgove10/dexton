@@ -9,11 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.time.Period;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 @WebServlet(name = "Cart", urlPatterns = {"/Cart"})
 public class Cart extends HttpServlet {
@@ -33,7 +29,6 @@ public class Cart extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-//        request.setAttribute("list_products", new ArrayList<Product>());
         ArrayList<Product> list_product = new ArrayList<>();
 
         if (session.getAttribute("list_products") != null){

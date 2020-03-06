@@ -117,7 +117,14 @@
                             <a class="dropdown-toggle" href="Cart">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Your Cart</span>
-                                <div class="qty">3</div>
+                                <div class="qty">
+                                    <c:if test="${!empty sessionScope.list_products.size()}">
+                                        <c:out value="${sessionScope.list_products.size()}"/>
+                                    </c:if>
+                                    <c:if test="${empty sessionScope.list_products.size()}">
+                                        0
+                                    </c:if>
+                                </div>
                             </a>
                         </div>
                         <!-- /Cart -->
