@@ -52,9 +52,6 @@ public class Products extends HttpServlet {
             }
         }
 
-        HttpSession session = request.getSession();
-        var listInCart = (ArrayList<Product>) session.getAttribute("list_products");
-
         request.setAttribute("listNewProducts", listNewProducts);
         request.setAttribute("listProducts", listProducts);
         request.setAttribute("categories", Navigation());
