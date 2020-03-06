@@ -27,7 +27,11 @@ public class Cart extends HttpServlet {
         try{
             list_product = (ArrayList<Product>) session.getAttribute("list_products");
             int item = Integer.parseInt(request.getParameter("delete"));
-            list_product.remove(item);
+            if (list_product.get(item).getQuantity() > 1){
+                list_product.get(item).setQuantity(list_product.get(item).getQuantity() - 1);
+            } else {
+                list_product.remove(item);
+            }
 
         }catch (Exception e){
             System.out.println(e);
