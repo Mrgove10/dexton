@@ -10,9 +10,6 @@
                 <li <c:if test="${ currentPage == 'Home' }">class="active"</c:if>>
                     <a href="Home">Home</a>
                 </li>
-                <li>
-                    <a href="#">Hot Deals</a>
-                </li>
                 <li <c:if test="${ currentPage == 'All' }">class="active"</c:if>>
                     <a href="All">All</a>
                 </li>
