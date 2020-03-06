@@ -135,24 +135,12 @@
                                             </div>
                                         </div>
                                         <div class="add-to-cart">
-                                            <c:choose>
-                                                <c:when test="${request.getSession().getAttribute('list_products').contains(product)}">
-                                                    <form method="post">
-                                                        <input type="hidden" name="product" value="${product.getId()}"/>
-                                                        <button class="add-to-cart-btn" type="submit" name="removeToCart">
-                                                            <i class="fas fa-trash-alt"></i>remove to cart
-                                                        </button>
-                                                    </form>
-                                                </c:when>
-                                                <c:otherwise>
-                                                    <form method="post">
-                                                        <input type="hidden" name="product" value="${product.getId()}"/>
-                                                        <button class="add-to-cart-btn" type="submit" name="addToCart">
-                                                            <i class="fa fa-shopping-cart"></i>add to cart
-                                                        </button>
-                                                    </form>
-                                                </c:otherwise>
-                                            </c:choose>
+                                            <form method="post">
+                                                <input type="hidden" name="product" value="${product.getId()}"/>
+                                                <button class="add-to-cart-btn" type="submit" name="addToCart">
+                                                    <i class="fa fa-shopping-cart"></i>add to cart
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </c:forEach>
