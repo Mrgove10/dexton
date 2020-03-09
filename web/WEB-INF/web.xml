@@ -71,6 +71,26 @@
         <url-pattern>/Cart</url-pattern>
     </servlet-mapping>
 
+    <!--Paiement-->
+    <servlet>
+        <servlet-name>Paiement</servlet-name>
+        <servlet-class>Servlets.Paiement</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Paiement</servlet-name>
+        <url-pattern>/Paiement</url-pattern>
+    </servlet-mapping>
+
+    <!--Admin-->
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>Servlets.Admin</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+
     <!--Products-->
     <servlet>
         <servlet-name>Products</servlet-name>

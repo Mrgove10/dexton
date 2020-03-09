@@ -1,6 +1,9 @@
 package Servlets;
 
+import Beans.Category;
 import Beans.Product;
+import DAO.Classes.CategoryDAO;
+import DAO.DAOConnection;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,13 +16,22 @@ import java.util.ArrayList;
 
 @WebServlet(name = "Cart", urlPatterns = {"/Cart"})
 public class Cart extends HttpServlet {
+    private ArrayList<Category> Navigation(){
+        CategoryDAO categoryDAO = new CategoryDAO(DAOConnection.ConnectDb());
+        return categoryDAO.findAll();
+    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
         ArrayList<Product> list_product;
         try{
             list_product = (ArrayList<Product>) session.getAttribute("list_products");
             int item = Integer.parseInt(request.getParameter("delete"));
-            list_product.remove(item);
+            if (list_product.get(item).getQuantity() > 1){
+                list_product.get(item).setQuantity(list_product.get(item).getQuantity() - 1);
+            } else {
+                list_product.remove(item);
+            }
 
         }catch (Exception e){
             System.out.println(e);
@@ -34,38 +46,21 @@ public class Cart extends HttpServlet {
         if (session.getAttribute("list_products") != null){
             list_product = (ArrayList<Product>) session.getAttribute("list_products");
         }
-//        else {
-//            Product product = new Product();
-//            product.setName("nom");
-//            product.setBrand("marque");
-//            product.setCategoryID(1);
-//            product.setDescription("description");
-//            product.setRating(5);
-//            product.setPrice(12);
-//            list_product.add(product);
-//
-//            Product product2 = new Product();
-//            product2.setName("nom");
-//            product2.setBrand("marque");
-//            product2.setCategoryID(1);
-//            product2.setDescription("description");
-//            product2.setRating(5);
-//            product2.setPrice(10);
-//            list_product.add(product2);
-//            session.setAttribute("list_products", list_product);
-//        }
 
         Float total = 0f;
+        int total_product = 0;
         try{
             for (Product item : list_product) {
-                total += item.getPrice();
+                total_product += item.getQuantity();
+                total += item.getPrice() * item.getQuantity();
             }
         }catch (Exception e){
             System.out.print(e);
         }
+        request.setAttribute("categories", Navigation());
         request.setAttribute("list_products", list_product);
         request.setAttribute("total", total);
-        request.setAttribute("total_products", list_product.size());
+        request.setAttribute("total_products", total_product);
         this.getServletContext().getRequestDispatcher("/WEB-INF/Cart.jsp").forward(request, response);
     }
 }
