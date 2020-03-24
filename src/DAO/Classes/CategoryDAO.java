@@ -1,9 +1,9 @@
 package DAO.Classes;
 
 import Beans.Category;
-import Beans.Role;
 import DAO.DAO;
 import Utils.Logging;
+import jdk.jshell.spi.ExecutionControl;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -12,13 +12,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class    CategoryDAO extends DAO<Category> {
+public class CategoryDAO extends DAO<Category> {
     public CategoryDAO(Connection conn) {
         super(conn);
     }
 
     /**
      * Creates a category
+     *
      * @param obj
      * @return
      */
@@ -47,6 +48,7 @@ public class    CategoryDAO extends DAO<Category> {
 
     /**
      * Deletes an category
+     *
      * @param obj
      * @return
      */
@@ -77,6 +79,7 @@ public class    CategoryDAO extends DAO<Category> {
 
     /**
      * Updates a role
+     *
      * @param obj
      * @return
      */
@@ -103,6 +106,10 @@ public class    CategoryDAO extends DAO<Category> {
             }
         }
         return false;
+    }
+
+    public ArrayList<Category> find() {
+        return null;
     }
 
     /**

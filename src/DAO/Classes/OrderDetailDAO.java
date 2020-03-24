@@ -1,5 +1,6 @@
 package DAO.Classes;
 
+import Beans.Category;
 import Beans.Order;
 import Beans.OrderDetail;
 import DAO.DAO;
@@ -10,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class OrderDetailDAO extends DAO<OrderDetail> {
     public OrderDetailDAO(Connection conn) {
@@ -93,6 +95,9 @@ public class OrderDetailDAO extends DAO<OrderDetail> {
             }
         }
         return false;
+    }
+    public ArrayList<OrderDetail> find() {
+        return null;
     }
 
     public OrderDetail find(int id) {

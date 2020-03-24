@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class OrderDAO extends DAO<Order> {
     public OrderDAO(Connection conn) {
@@ -90,6 +91,44 @@ public class OrderDAO extends DAO<Order> {
         }
         return false;
     }
+
+    /**
+     * Finds all the orders
+     * @return
+     */
+    public ArrayList<Order> find() {
+        ArrayList<Order> orderList = new ArrayList<>();
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Orders");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Order order = new Order();
+                //Retrieve by column name
+                order.setId(rs.getInt("ID"));
+                order.setUserID(rs.getInt("USER"));
+                order.setStatus(rs.getString("STATUS"));
+                orderList.add(order);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Fermeture de la connexion
+            try {
+                if (this.connect != null) {
+                    this.connect.close();
+                }
+            } catch (SQLException ignore) {
+            }
+        }
+
+        return orderList;
+    }
+
 
     public Order find(int id) {
         Order order = new Order();
