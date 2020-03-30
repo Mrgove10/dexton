@@ -22,7 +22,7 @@ public class Products extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = request.getRequestURL().toString();
         var arrayUrl = url.split("/");
-        var categoryName = arrayUrl[arrayUrl.length-1];
+        var categoryName = arrayUrl[arrayUrl.length - 1];
         System.out.println(categoryName);
         var categoryId = 0;
         var searchWord = "";
@@ -35,11 +35,11 @@ public class Products extends HttpServlet {
 
         ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
         var listProducts = new ArrayList<Product>();
-        listProducts = productDAO.FindByCategoryAndName(searchWord,categoryId);
-        if (listProducts.size() == 0){
-            if (categoryName.equals("All")){
+        listProducts = productDAO.FindByCategoryAndName(searchWord, categoryId);
+        if (listProducts.size() == 0) {
+            if (categoryName.equals("All")) {
                 listProducts = productDAO.find();
-            }else {
+            } else {
                 CategoryDAO categoryDAO = new CategoryDAO(DAOConnection.ConnectDb());
                 var category = categoryDAO.find(categoryName);
 
@@ -58,7 +58,7 @@ public class Products extends HttpServlet {
             Calendar currentDate = Calendar.getInstance();
             currentDate.setTime(current);
 
-            if (date.after(currentDate) || date.equals(currentDate)){
+            if (date.after(currentDate) || date.equals(currentDate)) {
                 listNewProducts.add(product);
             }
         }
@@ -71,13 +71,13 @@ public class Products extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getParameter("addToCart") != null){
-
+        if (request.getParameter("addToCart") != null) {
+            
             var id = Integer.parseInt(request.getParameter("product"));
             ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
             var product = productDAO.find(id);
             int quantity = product.getQuantity();
-            if (quantity == 0){
+            if (quantity == 0) {
                 product.setQuantity(1);
                 quantity = 1;
             }
@@ -85,17 +85,17 @@ public class Products extends HttpServlet {
 
             HttpSession session = request.getSession();
             ArrayList<Product> list = (ArrayList<Product>) session.getAttribute("list_products");
-            if (list == null){
+            if (list == null) {
                 list = new ArrayList<>();
             }
             boolean isAlone = true;
-            for (Product prod: list) {
-                if (prod.getId() == product.getId()){
+            for (Product prod : list) {
+                if (prod.getId() == product.getId()) {
                     prod.setQuantity(quantity + 1);
                     isAlone = false;
                 }
             }
-            if (isAlone){
+            if (isAlone) {
                 list.add(product);
             }
             System.out.println(product.getQuantity());
@@ -104,11 +104,11 @@ public class Products extends HttpServlet {
 
         String url = request.getRequestURL().toString();
         var arrayUrl = url.split("/");
-        var categoryName = arrayUrl[arrayUrl.length-1];
-        response.sendRedirect(request.getContextPath()+"/"+categoryName);
+        var categoryName = arrayUrl[arrayUrl.length - 1];
+        response.sendRedirect(request.getContextPath() + "/" + categoryName);
     }
 
-    private ArrayList<Category> Navigation(){
+    private ArrayList<Category> Navigation() {
         CategoryDAO categoryDAO = new CategoryDAO(DAOConnection.ConnectDb());
         return categoryDAO.findAll();
     }
