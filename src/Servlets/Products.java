@@ -24,8 +24,14 @@ public class Products extends HttpServlet {
         var arrayUrl = url.split("/");
         var categoryName = arrayUrl[arrayUrl.length-1];
         System.out.println(categoryName);
-        var categoryId = Integer.parseInt(request.getParameter("searchCategory"));
-        var searchWord = request.getParameter("searchWord");
+        var categoryId = 0;
+        var searchWord = "";
+        if(request.getParameter("searchCategory") != null){
+            categoryId = Integer.parseInt(request.getParameter("searchCategory"));
+        }
+        if (request.getParameter("searchWord") != null){
+            searchWord = request.getParameter("searchWord");
+        }
 
         ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
         var listProducts = new ArrayList<Product>();
