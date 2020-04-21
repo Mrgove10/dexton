@@ -1,7 +1,5 @@
 package Servlets;
 
-import Beans.Product;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet(name = "Paiement", urlPatterns = {"/Paiement"})
 public class Paiement extends HttpServlet {
@@ -19,11 +16,10 @@ public class Paiement extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession();
-        if(session.getAttribute("id") != null){
+        if (session.getAttribute("id") != null) {
             this.getServletContext().getRequestDispatcher("/WEB-INF/Paiement.jsp").forward(request, response);
-        }else{
-            response.sendRedirect( request.getContextPath() + "/Login");
+        } else {
+            response.sendRedirect(request.getContextPath() + "/Login");
         }
     }
-
 }
