@@ -60,7 +60,7 @@
                             </div>
                         </td>
                         <td>
-                            <button>Delete</button>
+                            <button style="width: 100%" type="submit" class="btn btn-primary">Delete</button>
                         </td>
 
                     </form>

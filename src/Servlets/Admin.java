@@ -64,7 +64,7 @@ public class Admin extends HttpServlet {
         request.setAttribute("listOrders", listOrders);
 
         this.getServletContext().getRequestDispatcher("/WEB-INF/Admin.jsp").forward(request, response);
-      /*  } else {
+      /*  } else { //TODO : uncomment this for pro use
             response.sendRedirect(request.getContextPath() + "/Login");
         }*/
     }
