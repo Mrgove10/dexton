@@ -11,17 +11,16 @@
             <tr>
                 <th>Name</th>
                 <th>Brand</th>
+                <th>Category</th>
                 <th>Price</th>
                 <th>Description</th>
                 <th>Rating</th>
-                <th>Modify</th>
-                <th>Delete</th>
             </tr>
             <c:forEach items="${listProducts}" var="product">
                 <tr>
                     <form style="margin: 100px; margin-top: 50px;" method="post">
                         <div class="form-group">
-                            <input type="hidden" class="form-control" id="update_form" name="update_form">
+                            <input type="hidden" class="form-control" id="update_form" name="update_form" value="${product.getId()}">
                         </div>
                         <td>
                             <div class="form-group">
@@ -37,6 +36,12 @@
                         </td>
                         <td>
                             <div class="form-group">
+                                <input type="number" class="form-control" id="category" name="category"
+                                       placeholder="Category" value="${product.getCategoryID()}">
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
                                 <input type="number" class="form-control" id="price" name="price"
                                        placeholder="99999" value="${product.getPrice()}">
                             </div>
@@ -48,21 +53,26 @@
                             </div>
                         </td>
                         <td>
-                            <p>${product.getRating()}</p>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="rating" name="rating"
+                                       placeholder="Rating" value="${product.getRating()}">
+                            </div>
                         </td>
 
                         <td>
-                            <div class="col-md-6">
-                                <button style="width: 100%" type="submit" class="btn btn-primary">Submit</button>
+                            <div class="form-group">
+                                <button style="width: 100%" type="submit" class="btn btn-primary">Modify</button>
                             </div>
-                            <div class="col-md-6">
-                                    ${message}
-                            </div>
-                        </td>
-                        <td>
-                            <button style="width: 100%" type="submit" class="btn btn-primary">Delete</button>
                         </td>
 
+                    </form>
+                    <form method="post">
+                        <td>
+                            <div class="form-group">
+                                <input type="hidden" class="form-control" id="delete_form" name="delete_form" value="${product.getId()}">
+                                <button style="width: 100%" type="submit" class="btn btn-primary">Delete</button>
+                            </div>
+                        </td>
                     </form>
                 </tr>
             </c:forEach>
@@ -103,6 +113,11 @@
             <label for="add_category">Category</label>
             <input type="number" class="form-control" id="add_category" name="add_category"
                    placeholder="Category" value="${product.getCategoryID()}">
+        </div>
+        <div class="form-group">
+            <label for="add_rating">Rating</label>
+            <input type="number" class="form-control" id="add_rating" name="add_rating"
+                   placeholder="Rating" value="${product.getRating()}">
         </div>
 
         <div class="col-md-6">
