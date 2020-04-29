@@ -31,6 +31,8 @@ if you are an Admininstrator you can accest the /Admin route.
 
 Dexton est un site de vente en ligne d'objets high tech.
 
+Le .war exporter est dans export/. Il a été exporté avec Intelliji.
+
 ### Database
 
 Elle est constiter de plusieur tables :
