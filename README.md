@@ -33,6 +33,8 @@ if you are an Admininstrator you can accest the /Admin route.
 
 Dexton est un site de vente en ligne d'objets high tech.
 
+**La bar de recherche est fonctionelle**
+
 ### Repartition de taches
 
 Frontend :
