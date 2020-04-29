@@ -4,6 +4,8 @@
   - [Configuration](#configuration)
   - [Administration](#administration)
   - [Documentation](#documentation)
+    - [Repartition de taches](#repartition-de-taches)
+    - [war file](#war-file)
     - [Database](#database)
     - [Pages](#pages)
       - [/Admin (Admin.java)](#admin-adminjava)
@@ -30,6 +32,18 @@ if you are an Admininstrator you can accest the /Admin route.
 ## Documentation
 
 Dexton est un site de vente en ligne d'objets high tech.
+
+### Repartition de taches
+
+Frontend :
+Lou B.
+Marc-Antoine P.
+
+Backend
+Adrien R.
+Edouard C.
+
+### war file
 
 Le .war exporter est dans export/. Il a été exporté avec Intelliji.
 
