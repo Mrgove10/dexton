@@ -7,6 +7,7 @@ import Utils.Logging;
 
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UserDAO extends DAO<User> {
     public UserDAO(Connection conn) {
@@ -160,6 +161,47 @@ public class UserDAO extends DAO<User> {
         }
 
         return user;
+    }
+
+
+    public ArrayList<User> find() throws IOException {
+        ArrayList<User> userList = new ArrayList<>();
+        int idRole = -1;
+
+        try {
+            PreparedStatement ps = this.connect.prepareStatement("SELECT * FROM Users");
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                User user = new User();
+                //Retrieve by column name
+                user.setId(rs.getInt("ID"));
+                user.setEmail(rs.getString("EMAIL"));
+                user.setFirstName(rs.getString("FIRSTNAME"));
+                user.setLastName(rs.getString("LASTNAME"));
+                idRole = rs.getInt("ROLE");
+                userList.add(user);
+
+                RoleDAO roleDAO = new RoleDAO(this.connect);
+                Role role = roleDAO.find(idRole);
+                user.setRole(role);
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            Logging.AddLog(Logging.Severity.Error, e.toString());
+        } finally {
+            try {
+                if (this.connect != null)
+                    this.connect.close();
+            } catch (SQLException ignore) {
+                Logging.AddLog(Logging.Severity.Error, ignore.toString());
+            }
+        }
+
+        return userList;
     }
 
     /**

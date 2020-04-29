@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class RoleDAO extends DAO<Role> {
     public RoleDAO(Connection conn) {
@@ -101,6 +102,15 @@ public class RoleDAO extends DAO<Role> {
             }
         }
         return false;
+    }
+
+    /**
+     * find all
+     *
+     * @return
+     */
+    public ArrayList<Role> find() {
+        return null;
     }
 
     /**
