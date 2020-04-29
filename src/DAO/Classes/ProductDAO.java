@@ -81,6 +81,7 @@ public class ProductDAO extends DAO<Product> {
             ps.setInt(5, obj.getCategoryID());
             ps.setFloat(6, obj.getRating());
             ps.setDate(7, obj.getAddDate());
+            ps.setInt(8, obj.getId());
             ps.executeUpdate();
 
         } catch (SQLException e) {

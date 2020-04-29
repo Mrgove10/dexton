@@ -24,22 +24,40 @@ import static java.lang.Integer.parseInt;
 public class Admin extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getParameter("update_form") != null) {
+
+            ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
+            Product product = productDAO.find(Integer.parseInt(request.getParameter("update_form")));
+
+            product.setName(request.getParameter("name"));
+            product.setPrice(Float.parseFloat(request.getParameter("price")));
+            product.setDescription(request.getParameter("description"));
+            product.setBrand(request.getParameter("brand"));
+            product.setCategoryID(Integer.parseInt(request.getParameter("category")));
+            product.setRating(Float.parseFloat(request.getParameter("rating")));
+
+            ProductDAO productDAO_update = new ProductDAO(DAOConnection.ConnectDb());
+            productDAO_update.update(product);
+
             System.out.println("Update form");
+
         } else if (request.getParameter("add_form") != null) {
-            System.out.println("Add form");
             Product P  = new Product();
             P.setName(request.getParameter("add_name"));
             P.setPrice(parseInt(request.getParameter("add_price")));
             P.setDescription(request.getParameter("add_description"));
-
+            P.setBrand(request.getParameter("add_brand"));
+            P.setCategoryID(Integer.parseInt(request.getParameter("add_category")));
+            P.setRating(Float.parseFloat(request.getParameter("add_rating")));
             ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
             productDAO.create(P);
-        }
 
-        var name = request.getParameter("name");
-        var price = request.getParameter("price");
-        System.out.println(name);
-        System.out.println(price);
+        } else if (request.getParameter("delete_form") != null){
+            ProductDAO productDAO = new ProductDAO(DAOConnection.ConnectDb());
+            Product product = productDAO.find(Integer.parseInt(request.getParameter("delete_form")));
+            ProductDAO productDAO_delete = new ProductDAO(DAOConnection.ConnectDb());
+            productDAO_delete.delete(product);
+        }
+        response.sendRedirect( request.getContextPath() + "/Admin");
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
